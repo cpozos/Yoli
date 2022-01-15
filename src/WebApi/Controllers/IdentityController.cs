@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Yoli.Core.App;
 using Yoli.Core.App.Repositories;
+using Yoli.Core.App.Requests;
+using Yoli.Core.App.Responses;
 using Yoli.Core.Domain.Entities;
-using Yoli.Core.WebApi.Contracts;
 
 namespace Yoli.Core.WebApi.Controllers
 {
@@ -22,11 +22,17 @@ namespace Yoli.Core.WebApi.Controllers
         [HttpPost("signup")]
         public async Task<IActionResult> SignUp([FromBody] YoliSignUpRequest request)
         {
-            return Ok();
+            return Ok(request);
         }
 
         [HttpPost("signin")]
-        public async Task<IActionResult> SignIn([FromBody] YoliBasicSigninRequest request)
+        public async Task<IActionResult> SignIn([FromBody] FacebookSignInRequest request)
+        {
+            return Ok(request);
+        }
+
+        [HttpPost("signin")]
+        public async Task<IActionResult> SignIn([FromBody] YoliSignInRequest request)
         {
             if (request is null)
                 return BadRequest();

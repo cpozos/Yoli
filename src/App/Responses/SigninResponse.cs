@@ -1,6 +1,6 @@
 ﻿using Yoli.Core.Domain.Entities;
 
-namespace Yoli.Core.App
+namespace Yoli.Core.App.Responses
 {
     public class SigninResponse
     {
