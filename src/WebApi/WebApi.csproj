@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Yoli.Core.App\App.csproj" />
-    <ProjectReference Include="..\Yoli.Core.Domain\Domain.csproj" />
+    <ProjectReference Include="..\App\App.csproj" />
+    <ProjectReference Include="..\Infraestructure\Infraestructure.csproj" />
   </ItemGroup>
 
 </Project>
