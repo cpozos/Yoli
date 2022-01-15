@@ -1,4 +1,4 @@
-﻿namespace Yoli.Core.Domain
+﻿namespace Yoli.Core.Domain.Entities
 {
     public class PhoneNumber
     {

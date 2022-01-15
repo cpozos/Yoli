@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Yoli.Core.App;
 using Yoli.Core.App.Repositories;
-using Yoli.Core.Domain;
+using Yoli.Core.Domain.Entities;
 using Yoli.Core.WebApi.Contracts;
 
 namespace Yoli.Core.WebApi.Controllers
@@ -33,7 +34,7 @@ namespace Yoli.Core.WebApi.Controllers
             if (string.IsNullOrWhiteSpace(request.SignInId) || string.IsNullOrWhiteSpace(request.Password))
                 return BadRequest();
 
-            User user;
+            IUser user;
             if (request.SignInId.Contains("@"))
             {
                 // Get user by email
@@ -45,7 +46,7 @@ namespace Yoli.Core.WebApi.Controllers
                 user = await _userRepository.GetUser(user => user.UserName == request.SignInId);
             }
 
-            return user is null ? BadRequest() : Ok(user);
+            return user is null ? BadRequest() : Ok(new SigninResponse(user));
         }
     }
 }

@@ -1,8 +1,7 @@
-﻿namespace Domain.Entities
+﻿namespace Yoli.Core.Domain.Entities
 {
-    public class Location
+    public class GpsInfo
     {
-        public string Name { get; set; }
         public long Longitude { get; set; }
         public long Latitude { get; set; }
     }

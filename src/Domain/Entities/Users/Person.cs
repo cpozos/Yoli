@@ -1,6 +1,6 @@
-﻿namespace Yoli.Core.Domain
+﻿namespace Yoli.Core.Domain.Entities
 {
-    public class Person : User
+    public class Person
     {
         public string FirstName { get; set; }
         public string SecondName { get; set; }

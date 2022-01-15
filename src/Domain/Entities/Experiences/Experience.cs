@@ -1,4 +1,4 @@
-﻿namespace Domain.Entities
+﻿namespace Yoli.Core.Domain.Entities
 {
     public class Experience
     {
