@@ -8,7 +8,7 @@ namespace Yoli.Core.WebApi.Controllers
     public class UserController : ControllerBase
     {
         private ILogger _logger;
-        public UserController(ILogger<UserController> logger)
+        public UserController(ILogger<UserController> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
         }

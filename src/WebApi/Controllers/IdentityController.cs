@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Endpoints;
 using Yoli.Core.App.Repositories;
 using Yoli.Core.App.Requests;
 using Yoli.Core.App.Responses;
@@ -19,19 +20,33 @@ namespace Yoli.Core.WebApi.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpPost("signup")]
+        [HttpPost(IdentityEndpoint.SigninFacebook)]
+        public async Task<IActionResult> SignInFacebbok([FromBody] FacebookSignInRequest request)
+        {
+
+            return Ok(request);
+        }
+
+        [HttpGet("face")]
+        public async Task<IActionResult> ClientFacebookTest([FromQuery]string code)
+        {
+            var a = code?.ToString();
+
+            return Ok(a);
+        }
+
+        [HttpPost("face")]
+        public async Task<IActionResult> TokenFace([FromBody]object data)
+        {
+            return Ok(data);
+        }
+        [HttpPost(IdentityEndpoint.SignupYoli)]
         public async Task<IActionResult> SignUp([FromBody] YoliSignUpRequest request)
         {
             return Ok(request);
         }
 
-        [HttpPost("signin")]
-        public async Task<IActionResult> SignIn([FromBody] FacebookSignInRequest request)
-        {
-            return Ok(request);
-        }
-
-        [HttpPost("signin")]
+        [HttpPost(IdentityEndpoint.SigninYoli)]
         public async Task<IActionResult> SignIn([FromBody] YoliSignInRequest request)
         {
             if (request is null)
