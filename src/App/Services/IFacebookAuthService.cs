@@ -1,6 +1,6 @@
-﻿using App.External.Contracts;
+﻿using Yoli.Core.App.External.Contracts;
 
-namespace App.Services
+namespace Yoli.Core.App.Services
 {
     public interface IFacebookAuthService
     {

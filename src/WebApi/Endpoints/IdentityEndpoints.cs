@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace WebApi.Endpoints
+namespace Yoli.Core.WebApi.Endpoints
 {
     public class IdentityEndpoint
     {

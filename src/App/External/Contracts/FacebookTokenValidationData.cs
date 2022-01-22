@@ -1,17 +1,17 @@
 ﻿using Newtonsoft.Json;
 
-namespace App.External.Contracts
+namespace Yoli.Core.App.External.Contracts
 {
     public class FacebookTokenValidationData
     {
         [JsonProperty("app_id")]
-        public string AppId { get; set; }
+        public string AppId { get; set; } = string.Empty;
 
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public string Type { get; set; } = string.Empty;
 
         [JsonProperty("application")]
-        public string Application { get; set; }
+        public string Application { get; set; } = string.Empty;
 
         [JsonProperty("data_access_expires_at")]
         public long DataAccessExpiresAt { get; set; }
@@ -23,9 +23,9 @@ namespace App.External.Contracts
         public bool IsValid { get; set; }
 
         [JsonProperty("scopes")]
-        public string[] Scopes { get; set; }
+        public string[] Scopes { get; set; } = Array.Empty<string>();
 
         [JsonProperty("user_id")]
-        public string UserId { get; set; }
+        public string UserId { get; set; } = string.Empty;
     }
 }

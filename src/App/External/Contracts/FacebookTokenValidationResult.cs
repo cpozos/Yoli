@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 
-namespace App.External.Contracts
+namespace Yoli.Core.App.External.Contracts
 {
     public class FacebookTokenValidationResult
     {
         [JsonProperty("data")]
-        public FacebookTokenValidationData Data { get; set; }
+        public FacebookTokenValidationData Data { get; set; } = new();
     }
 }

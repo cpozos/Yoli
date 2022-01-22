@@ -1,4 +1,4 @@
-﻿namespace App.Options
+﻿namespace Yoli.Core.App.Options
 {
     public class FacebookAuthSettings
     {

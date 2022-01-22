@@ -1,6 +1,6 @@
-﻿using App.External.Contracts;
-using App.Options;
-using App.Services;
+﻿using Yoli.Core.App.External.Contracts;
+using Yoli.Core.App.Options;
+using Yoli.Core.App.Services;
 using Newtonsoft.Json;
 
 namespace Infraestructure.Services
@@ -24,7 +24,8 @@ namespace Infraestructure.Services
             var result = await _clientFactory.CreateClient().GetAsync(formattedUrl);
             result.EnsureSuccessStatusCode();
             var responseAsString = await result.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<FacebookTokenValidationResult>(responseAsString);
+            var json = JsonConvert.DeserializeObject<FacebookTokenValidationResult>(responseAsString);
+            return json ?? new FacebookTokenValidationResult();
         }
 
         public async Task<FacebookUserInfoResult> GetUserInfoAsync(string accessToken)
@@ -33,7 +34,8 @@ namespace Infraestructure.Services
             var result = await _clientFactory.CreateClient().GetAsync(formattedUrl);
             result.EnsureSuccessStatusCode();
             var responseAsString = await result.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<FacebookUserInfoResult>(responseAsString);
+            var json = JsonConvert.DeserializeObject<FacebookUserInfoResult>(responseAsString);
+            return json ?? new FacebookUserInfoResult();
         }
     }
 }
