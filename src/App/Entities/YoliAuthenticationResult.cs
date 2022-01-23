@@ -4,11 +4,10 @@
     {
         public bool Succeeded { get; }
         public string Token { get; }
-        public YoliAuthenticationResult(bool succeeded, string token)
+        public YoliAuthenticationResult(string token = null)
         {
-            ArgumentNullException.ThrowIfNull(token);
-            Succeeded = succeeded;
-            Token = token;
+            Token = token ?? string.Empty;
+            Succeeded = !string.IsNullOrEmpty(token);
         }
     }
 }

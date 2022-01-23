@@ -19,13 +19,13 @@ namespace Yoli.Core.App.Services
         {
             if (string.IsNullOrWhiteSpace(accessToken))
             {
-                return new YoliIdentityResult(false, new[] { "Invalid Facebook Token" });
+                return new YoliIdentityResult(new[] { "Invalid Facebook Token" });
             }
 
             var result = (await _facebookAuthService.ValidateAccessTokenAsync(accessToken)).Data;
             if (!result.IsValid)
             {
-                return new YoliIdentityResult(false, new[] { "Invalid Facebook Token" });
+                return new YoliIdentityResult(new[] { "Invalid Facebook Token" });
             }
 
             var facebookUserInfo = await _facebookAuthService.GetUserInfoAsync(accessToken);
@@ -42,7 +42,7 @@ namespace Yoli.Core.App.Services
             }
 
             ArgumentNullException.ThrowIfNull(user);
-            return new YoliIdentityResult(true);
+            return new YoliIdentityResult { User = user };
         }
     }
 }

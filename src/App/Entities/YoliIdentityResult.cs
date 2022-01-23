@@ -4,13 +4,12 @@ namespace Yoli.Core.App.Entities
 {
     public class YoliIdentityResult
     { 
-        public bool Succeeded { get; set; }
+        public bool Succeeded => Errors?.Count() > 0 && User != null;
         public IUser User { get; set; }
         public IEnumerable<string> Errors { get; set; }
 
-        public YoliIdentityResult(bool succeeded, IEnumerable<string> errors = null)
+        public YoliIdentityResult(IEnumerable<string> errors = null)
         {
-            Succeeded = succeeded;
             Errors = errors ?? Enumerable.Empty<string>();
         }
     }
