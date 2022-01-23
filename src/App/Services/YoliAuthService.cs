@@ -7,7 +7,7 @@ namespace Yoli.Core.App.Services
     {
         public async Task<YoliAuthenticationResult> GenerateAuthenticationResultForUserAsync(IUser user)
         {
-            var response = new YoliAuthenticationResult(true, user.Id.ToString());
+            var response = new YoliAuthenticationResult(user.Id.ToString());
             return await Task.FromResult(response);
         }
     }

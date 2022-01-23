@@ -29,7 +29,7 @@ namespace Yoli.Core.App.Services
             }
 
             var facebookUserInfo = await _facebookAuthService.GetUserInfoAsync(accessToken);
-            var user = await _userRepository.GetUser(u => u.Email.Address == facebookUserInfo.Email);
+            var user = await _userRepository.GetUserAsync(u => u.Email.Address == facebookUserInfo.Email);
             if (user is null)
             {
                 user = new User
@@ -38,7 +38,7 @@ namespace Yoli.Core.App.Services
                     LastName = facebookUserInfo.LastName,
                     Email = new Email(facebookUserInfo.Email)
                 };
-                user = await _userRepository.AddUser(user);
+                user = await _userRepository.AddUserAsync(user);
             }
 
             ArgumentNullException.ThrowIfNull(user);

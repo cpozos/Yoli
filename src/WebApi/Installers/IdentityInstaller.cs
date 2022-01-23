@@ -11,6 +11,7 @@ namespace Yoli.Core.WebApi.Installers
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IYoliIdentityService, YoliIdentityService>();
             services.AddSingleton<IYoliAuthService, YoliAuthService>();
+            services.AddSingleton<IUserService, UserService>();
         }
     }
 }

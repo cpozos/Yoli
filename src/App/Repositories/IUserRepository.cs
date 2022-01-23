@@ -4,7 +4,7 @@ namespace Yoli.Core.App.Repositories
 {
     public interface IUserRepository
     {
-        Task<IUser> GetUser(Func<IUser, bool> filter);
-        Task<IUser> AddUser(IUser user);
+        Task<IUser> GetUserAsync(Func<IUser, bool> filter);
+        Task<IUser> AddUserAsync(IUser user);
     }
 }

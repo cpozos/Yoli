@@ -1,22 +1,33 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Yoli.Core.App.Services;
 using Microsoft.AspNetCore.Mvc;
+using Yoli.Core.WebApi.Routes;
+using Yoli.Core.WebApi.Attributes;
 
 namespace Yoli.Core.WebApi.Controllers
 {
-    [Route("api/users")]
+    [Route(ApiRoutes.Base)]
     [ApiController]
     public class UserController : ControllerBase
     {
-        private ILogger _logger;
-        public UserController(ILogger<UserController> logger, IHttpClientFactory httpClientFactory)
+        private IUserService _userService;
+        public UserController(IUserService userService)
         {
-            _logger = logger;
+            _userService = userService;
         }
 
-        [HttpGet("{id}")]
+        [YoliAuthorize]
+        [HttpGet("users/{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
-            return Ok($"Ok: {id}");
+            var user = _userService.GetUserAsync();
+            return Ok(user);
+        }
+
+        [HttpGet("users2/{id}")]
+        public async Task<IActionResult> GetUser2(int id)
+        {
+            var user = _userService.GetUserAsync();
+            return Ok(user);
         }
     }
 }
