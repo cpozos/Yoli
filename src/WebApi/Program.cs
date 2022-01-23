@@ -1,6 +1,7 @@
-using WebApi.Installations;
+using WebApi.Extensions;
 using Yoli.Core.App.Repositories;
 using Yoli.Core.Infraestructure;
+using Yoli.Core.WebApi.Installers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,13 +11,11 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Add custom services
-var installers = typeof(Program).Assembly.ExportedTypes
+typeof(Program).Assembly.ExportedTypes
     .Where(x => typeof(IInstaller).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)
-    ?.Cast<IInstaller>()
-    ?.ToList();
-
-installers?.ForEach(x => x.InstallServices(builder.Configuration, builder.Services));
-
+    .Select(x => Activator.CreateInstance(x))
+    .Cast<IInstaller>()
+    .ForEach(x => x.InstallServices(builder.Configuration, builder.Services));
 
 var app = builder.Build();
 

@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Yoli.Core.WebApi.Endpoints;
 using Yoli.Core.App.Repositories;
 using Yoli.Core.Domain.Entities;
 using Yoli.Core.App.Services;
 using Yoli.Core.WebApi.Responses;
 using Yoli.Core.WebApi.Requests;
+using Yoli.Core.WebApi.Routes;
 
 namespace Yoli.Core.WebApi.Controllers
 {
-    [Route("api")]
+    [Route(ApiRoutes.Root)]
     [ApiController]
     public class IdentityController : ControllerBase
     {
@@ -27,7 +27,7 @@ namespace Yoli.Core.WebApi.Controllers
             _yoliAuthService = yoliAuthService;
         }
 
-        [HttpPost(IdentityEndpoint.SigninFacebook)]
+        [HttpPost($"{ApiVersion.V1}/{ApiRoutes.IdentityRoutes.SigninYoli}")]
         public async Task<AuthenticationResponse> SignInFacebbok([FromBody] FacebookSignInRequest request)
         {
             var result = await _yoliIdentityService.SigninUsingFacebookTask(request.AccessToken);
@@ -43,6 +43,7 @@ namespace Yoli.Core.WebApi.Controllers
         [HttpGet("face")]
         public async Task<IActionResult> ClientFacebookTest([FromQuery]string code)
         {
+            var b = GeneratedIdentityApiRoutes.V1;
             var a = code?.ToString();
 
             return Ok(a);
@@ -53,13 +54,13 @@ namespace Yoli.Core.WebApi.Controllers
         {
             return Ok(data);
         }
-        [HttpPost(IdentityEndpoint.SignupYoli)]
+        [HttpPost($"{ApiVersion.V1}/{ApiRoutes.IdentityRoutes.SignupYoli}")]
         public async Task<IActionResult> SignUp([FromBody] YoliSignUpRequest request)
         {
             return Ok(request);
         }
 
-        [HttpPost(IdentityEndpoint.SigninYoli)]
+        [HttpPost($"{ApiVersion.V1}/{ApiRoutes.IdentityRoutes.SigninYoli}")]
         public async Task<IActionResult> SignIn([FromBody] YoliSignInRequest request)
         {
             if (request is null)

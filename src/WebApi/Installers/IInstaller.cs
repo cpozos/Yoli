@@ -1,4 +1,4 @@
-﻿namespace WebApi.Installations
+﻿namespace Yoli.Core.WebApi.Installers
 {
     public interface IInstaller
     {
