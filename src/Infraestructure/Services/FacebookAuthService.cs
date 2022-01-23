@@ -25,6 +25,12 @@ namespace Infraestructure.Services
             result.EnsureSuccessStatusCode();
             var responseAsString = await result.Content.ReadAsStringAsync();
             var json = JsonConvert.DeserializeObject<FacebookTokenValidationResult>(responseAsString);
+
+            if (json.Data.AppId != _facebookAuthSettings.AppId)
+            {
+                return new FacebookTokenValidationResult();
+            }
+
             return json ?? new FacebookTokenValidationResult();
         }
 

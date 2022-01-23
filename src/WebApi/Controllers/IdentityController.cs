@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Yoli.Core.WebApi.Endpoints;
 using Yoli.Core.App.Repositories;
-using Yoli.Core.App.Requests;
-using Yoli.Core.App.Responses;
 using Yoli.Core.Domain.Entities;
 using Yoli.Core.App.Services;
+using Yoli.Core.WebApi.Responses;
+using Yoli.Core.WebApi.Requests;
 
 namespace Yoli.Core.WebApi.Controllers
 {
@@ -14,48 +14,30 @@ namespace Yoli.Core.WebApi.Controllers
     {
         private ILogger _logger;
         private IUserRepository _userRepository;
-        private readonly IFacebookAuthService _facebookAuthService;
+        private readonly IYoliIdentityService _yoliIdentityService;
         private readonly IYoliAuthService _yoliAuthService;
         public IdentityController(ILogger<IdentityController> logger, 
             IUserRepository userRepository,
-            IFacebookAuthService facebookAuthService,
+            IYoliIdentityService yoliIdentityService,
             IYoliAuthService yoliAuthService)
         {
             _logger = logger;
             _userRepository = userRepository;
-            _facebookAuthService = facebookAuthService;
+            _yoliIdentityService = yoliIdentityService;
             _yoliAuthService = yoliAuthService;
         }
 
         [HttpPost(IdentityEndpoint.SigninFacebook)]
         public async Task<AuthenticationResponse> SignInFacebbok([FromBody] FacebookSignInRequest request)
         {
-            var result = await _facebookAuthService.ValidateAccessTokenAsync(request.AccessToken);
-
-            if (!result.Data.IsValid)
+            var result = await _yoliIdentityService.SigninUsingFacebookTask(request.AccessToken);
+            if (!result.Succeeded)
             {
-                return new AuthenticationResponse
-                {
-                    Errors = new[] { "Invalid Facebook Token" }
-                };
+                return new AuthenticationResponse(false, result.Errors);
             }
 
-            var userInfo = await _facebookAuthService.GetUserInfoAsync(request.AccessToken);
-            var user = await _userRepository.GetUser(u => u.Email.Address == userInfo.Email);
-            if (userInfo is null)
-            {
-                var yoliUser = new User
-                {
-                    FirstName = userInfo.FirstName,
-                    LastName = userInfo.LastName,
-                    Email = new Email(userInfo.Email)
-                };
-                user = await _userRepository.AddUser(user);
-            }
-
-            //TODO: Merge both classes
-            var authResult = await _yoliAuthService.GenerateAuthenticationResultForUserAsync(user);
-            return new AuthenticationResponse { Token = authResult.Token };
+            var authResult = await _yoliAuthService.GenerateAuthenticationResultForUserAsync(result.User);
+            return new AuthenticationResponse(true) { Token = authResult.Token };
         }
 
         [HttpGet("face")]

@@ -1,4 +1,4 @@
-﻿namespace Yoli.Core.App.Requests
+﻿namespace Yoli.Core.WebApi.Requests
 {
     public record BaseRequest
     {
