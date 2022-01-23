@@ -15,32 +15,43 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infraestructure", "src\Infr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "src\WebApi\WebApi.csproj", "{F35E0A52-92DB-4345-AF4C-3773FA08CCA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generators", "src\Generators\Generators.csproj", "{5C15A034-39D3-4C6C-A0EF-F7C171AEDA40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generators", "src\Generators\Generators.csproj", "{5C15A034-39D3-4C6C-A0EF-F7C171AEDA40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		DGenerators|Any CPU = DGenerators|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3DE9F282-7059-4F80-9757-021901197C64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3DE9F282-7059-4F80-9757-021901197C64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DE9F282-7059-4F80-9757-021901197C64}.DGenerators|Any CPU.ActiveCfg = DGenerators|Any CPU
+		{3DE9F282-7059-4F80-9757-021901197C64}.DGenerators|Any CPU.Build.0 = DGenerators|Any CPU
 		{3DE9F282-7059-4F80-9757-021901197C64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DE9F282-7059-4F80-9757-021901197C64}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4BD794F2-2D9A-45D0-B98F-11169E80B62F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4BD794F2-2D9A-45D0-B98F-11169E80B62F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BD794F2-2D9A-45D0-B98F-11169E80B62F}.DGenerators|Any CPU.ActiveCfg = DGenerators|Any CPU
+		{4BD794F2-2D9A-45D0-B98F-11169E80B62F}.DGenerators|Any CPU.Build.0 = DGenerators|Any CPU
 		{4BD794F2-2D9A-45D0-B98F-11169E80B62F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BD794F2-2D9A-45D0-B98F-11169E80B62F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DF231275-479C-424A-ADA5-EAA18C254DB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DF231275-479C-424A-ADA5-EAA18C254DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF231275-479C-424A-ADA5-EAA18C254DB9}.DGenerators|Any CPU.ActiveCfg = DGenerators|Any CPU
+		{DF231275-479C-424A-ADA5-EAA18C254DB9}.DGenerators|Any CPU.Build.0 = DGenerators|Any CPU
 		{DF231275-479C-424A-ADA5-EAA18C254DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF231275-479C-424A-ADA5-EAA18C254DB9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F35E0A52-92DB-4345-AF4C-3773FA08CCA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F35E0A52-92DB-4345-AF4C-3773FA08CCA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F35E0A52-92DB-4345-AF4C-3773FA08CCA1}.DGenerators|Any CPU.ActiveCfg = DGenerators|Any CPU
+		{F35E0A52-92DB-4345-AF4C-3773FA08CCA1}.DGenerators|Any CPU.Build.0 = DGenerators|Any CPU
 		{F35E0A52-92DB-4345-AF4C-3773FA08CCA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F35E0A52-92DB-4345-AF4C-3773FA08CCA1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C15A034-39D3-4C6C-A0EF-F7C171AEDA40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5C15A034-39D3-4C6C-A0EF-F7C171AEDA40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C15A034-39D3-4C6C-A0EF-F7C171AEDA40}.DGenerators|Any CPU.ActiveCfg = DGenerators|Any CPU
+		{5C15A034-39D3-4C6C-A0EF-F7C171AEDA40}.DGenerators|Any CPU.Build.0 = DGenerators|Any CPU
 		{5C15A034-39D3-4C6C-A0EF-F7C171AEDA40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C15A034-39D3-4C6C-A0EF-F7C171AEDA40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

@@ -58,7 +58,7 @@ namespace SourceGenerator
         public void Initialize(GeneratorInitializationContext context)
         {
             context.RegisterForSyntaxNotifications(() => new CustomReceiver());
-#if DEBUG
+#if DGENERATORS
             if (!Debugger.IsAttached)
             {
                 Debugger.Launch();
