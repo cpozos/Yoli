@@ -33,11 +33,11 @@ namespace Yoli.Core.WebApi.Controllers
             var result = await _yoliIdentityService.SigninUsingFacebookTask(request.AccessToken);
             if (!result.Succeeded)
             {
-                return new AuthenticationResponse(false, result.Errors);
+                return new AuthenticationResponse(result.Errors);
             }
 
             var authResult = await _yoliAuthService.GenerateAuthenticationResultForUserAsync(result.User);
-            return new AuthenticationResponse(true) { Token = authResult.Token };
+            return new AuthenticationResponse { Token = authResult.Token };
         }
 
         [HttpGet("face")]
@@ -54,6 +54,7 @@ namespace Yoli.Core.WebApi.Controllers
         {
             return Ok(data);
         }
+
         [HttpPost($"{ApiVersion.V1}/{ApiRoutes.IdentityRoutes.SignupYoli}")]
         public async Task<IActionResult> SignUp([FromBody] YoliSignUpRequest request)
         {
