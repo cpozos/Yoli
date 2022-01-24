@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using WebApi.Extensions;
 using Yoli.Core.App.Repositories;
 using Yoli.Core.Infraestructure;
@@ -9,6 +10,27 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+//{
+//    opt.TokenValidationParameters = new()
+//    {
+//        ValidateIssuer = true,
+//        ValidateAudience = true,
+//        ValidateLifetime = true,
+//        ValidateIssuerSigningKey = true,
+//        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+//        ValidAudience = builder.Configuration["Jwt:Issuer"],
+//        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+//    };
+//});
+//builder.Services.AddAuthorization(config =>
+//{
+//    config.AddPolicy("authenticated", config =>
+//    {
+//        config.RequireAuthenticatedUser();
+//    });
+//});
 
 // Add custom services
 typeof(Program).Assembly.ExportedTypes
@@ -23,9 +45,11 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+// app.UseAuthentication();
 
 app.UseMiddleware<JwtMiddleware>();
+
+app.UseAuthorization();
 
 app.MapControllers();
 
