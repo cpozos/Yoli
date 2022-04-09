@@ -4,6 +4,6 @@ namespace Yoli.Core.App.Services
 {
     public interface ITokenService
     {
-        Task<string> GenerateSigUpToken(string id, string p);
+        Task<string> GenerateEmailConfirmationTokenAsync(string id);
     }
 }
