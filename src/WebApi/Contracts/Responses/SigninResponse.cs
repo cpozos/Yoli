@@ -10,7 +10,7 @@ namespace Yoli.Core.WebApi.Responses
         public SigninResponse(IUser user)
         {
             Id = user.Id;
-            Name = user.UserName;
+            Name = user.Name;
         }
     }
 }

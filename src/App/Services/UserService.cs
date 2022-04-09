@@ -1,4 +1,5 @@
-﻿using Yoli.Core.App.Entities;
+﻿using System.Security.Claims;
+using Yoli.Core.App.Entities;
 using Yoli.Core.App.Repositories;
 using Yoli.Core.Domain.Entities;
 
@@ -11,12 +12,15 @@ namespace Yoli.Core.App.Services
         {
             _userRepository = userRepository;
         }
-
         public async Task<Result<IUser>> GetUserAsync()
         {
             var user = await _userRepository.GetUserAsync(u => u.Id == 1);
             var result = new Result<IUser> { Data = user };
             return result;
+        }
+        public Task<Claim[]> GetClaims(int userId)
+        {
+            return Task.FromResult(new Claim[1] { new Claim(ClaimTypes.Name, "") });
         }
     }
 }

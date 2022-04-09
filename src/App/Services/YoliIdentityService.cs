@@ -44,5 +44,7 @@ namespace Yoli.Core.App.Services
             ArgumentNullException.ThrowIfNull(user);
             return new YoliIdentityResult { User = user };
         }
+
+        
     }
 }

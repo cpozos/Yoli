@@ -6,6 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Configurations>Debug;Release;DGenerators</Configurations>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DataAnnotationsExtensions" Version="5.0.1.27" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App\App.csproj" />
     <ProjectReference Include="..\Infraestructure\Infraestructure.csproj" />

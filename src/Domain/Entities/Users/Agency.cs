@@ -3,7 +3,7 @@
     public class Agency : IUser
     {
         public int Id { get; set; }
-        public string UserName { get; set; }
+        public string Name { get; set; }
         public Email Email { get; set; }
         public string AgencyName { get; set; }
         public Person Representant { get; set; }

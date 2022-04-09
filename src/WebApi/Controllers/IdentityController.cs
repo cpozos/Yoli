@@ -55,11 +55,7 @@ namespace Yoli.Core.WebApi.Controllers
             return Ok(data);
         }
 
-        [HttpPost($"{ApiVersion.V1}/{ApiRoutes.IdentityRoutes.SignupYoli}")]
-        public async Task<IActionResult> SignUp([FromBody] YoliSignUpRequest request)
-        {
-            return Ok(request);
-        }
+        
 
         [HttpPost($"{ApiVersion.V1}/{ApiRoutes.IdentityRoutes.SigninYoli}")]
         public async Task<IActionResult> SignIn([FromBody] YoliSignInRequest request)
@@ -79,7 +75,8 @@ namespace Yoli.Core.WebApi.Controllers
             }
             else
             {
-                user = await _userRepository.GetUserAsync(user => user.UserName == request.SignInId);
+                // Get user bu user name
+                user = await _userRepository.GetUserAsync(user => user.Name == request.SignInId);
             }
 
             return user is null ? BadRequest() : Ok(new SigninResponse(user));

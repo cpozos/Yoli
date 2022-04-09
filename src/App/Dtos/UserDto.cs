@@ -1,9 +1,12 @@
 ﻿using Domain.ValueObjects;
 
-namespace Yoli.Core.Domain.Entities
+namespace Yoli.Core.App.Dtos
 {
-    public class Person
+    public class UserDto
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string LastName { get; set; }
