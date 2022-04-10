@@ -7,7 +7,7 @@ namespace Yoli.Core.App.Services
 {
     public interface IUserService
     {
-        Task<Result<IUser>> AddUserAsync(UserDto dto);
+        Task<Result<IUser>> AddUserAsync(PersonUserDto dto);
         Task<bool> UpdateUserAsync();
 
         // TODO: Replace adding Func<IUser,bool>

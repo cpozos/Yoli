@@ -31,7 +31,7 @@ namespace Yoli.Core.WebApi.Controllers
         public async Task<IActionResult> SignUp([FromBody] YoliSignUpRequest request)
         {
             // Save data
-            var user = new UserDto
+            var user = new PersonUserDto
             {
                 FirstName = request.FirstName,
                 SecondName = request.SecondName,

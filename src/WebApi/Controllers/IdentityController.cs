@@ -73,7 +73,7 @@ namespace Yoli.Core.WebApi.Controllers
                 {
                     return BadRequest();
                 }
-                user = await _userRepository.GetUserAsync(user => user.Email == request.SignInId);
+                user = await _userRepository.GetUserAsync(user => user.Email.Email == request.SignInId);
             }
             else
             {

@@ -1,4 +1,4 @@
-﻿namespace Yoli.Core.Domain.Entities
+﻿namespace Yoli.Core.Domain.ValueObjects
 {
     public class Address
     {
