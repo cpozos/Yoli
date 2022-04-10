@@ -13,22 +13,20 @@ namespace Yoli.Core.WebApi.Controllers
     [ApiController]
     public class IdentityController : ControllerBase
     {
-        private ILogger _logger;
         private IUserRepository _userRepository;
         private readonly IYoliIdentityService _yoliIdentityService;
         private readonly IYoliAuthService _yoliAuthService;
-        public IdentityController(ILogger<IdentityController> logger, 
+        public IdentityController(
             IUserRepository userRepository,
             IYoliIdentityService yoliIdentityService,
             IYoliAuthService yoliAuthService)
         {
-            _logger = logger;
             _userRepository = userRepository;
             _yoliIdentityService = yoliIdentityService;
             _yoliAuthService = yoliAuthService;
         }
 
-        [HttpPost($"{ApiVersion.V1}/{ApiRoutes.IdentityRoutes.SigninYoli}")]
+        [HttpPost($"{ApiVersion.V1}/{ApiRoutes.IdentityRoutes.SigninFacebook}")]
         public async Task<AuthenticationResponse> SignInFacebbok([FromBody] FacebookSignInRequest request)
         {
             var result = await _yoliIdentityService.SigninUsingFacebookTask(request.AccessToken);

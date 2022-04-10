@@ -5,17 +5,15 @@ using Yoli.Core.App.Services;
 public class JwtMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly ITokenService _tokenService;
     //private readonly AppSettings _appSettings;
 
-    public JwtMiddleware(RequestDelegate next, ITokenService tokenService/*, IOptions<AppSettings> appSettings*/)
+    public JwtMiddleware(RequestDelegate next /*, IOptions<AppSettings> appSettings*/)
     {
         _next = next;
-        _tokenService = tokenService;
         //_appSettings = appSettings.Value;
     }
 
-    public async Task Invoke(HttpContext context, IUserService userService)
+    public async Task Invoke(HttpContext context, ITokenService tokenService, IUserService userService)
     {
         string? authHeaderValue = context.Request.Headers["Authorization"].FirstOrDefault();
         bool isValid = await ValidateHeaderAsync(authHeaderValue);
@@ -23,8 +21,8 @@ public class JwtMiddleware
         {
             string? token = authHeaderValue!.Split(" ")[1];
             bool attachUserToContext =
-                _tokenService.ValidateToken(token, out JwtSecurityToken jwt) &&
-                _tokenService.GetClaimValue(jwt, x => x.Type == JwtRegisteredClaimNames.Sub, out string claimValue) &&
+                tokenService.ValidateToken(token, out JwtSecurityToken jwt) &&
+                tokenService.GetClaimValue(jwt, x => x.Type == JwtRegisteredClaimNames.Sub, out string claimValue) &&
                 int.TryParse(claimValue, out int userId);
 
             if (attachUserToContext)

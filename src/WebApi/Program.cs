@@ -1,15 +1,23 @@
 using Microsoft.AspNetCore.Authorization;
 using WebApi.Extensions;
 using Yoli.Core.App.Repositories;
+using Yoli.Core.App.Services;
 using Yoli.Core.Infraestructure;
+using Yoli.Core.Infraestructure.Services;
 using Yoli.Core.WebApi.Installers;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+// Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 
 //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 //{
@@ -40,10 +48,11 @@ typeof(Program).Assembly.ExportedTypes
     .ForEach(x => x.InstallServices(builder.Configuration, builder.Services));
 
 var app = builder.Build();
+app.UseSwagger();
 
 // Configure the HTTP request pipeline.
-
 app.UseHttpsRedirection();
+
 
 // app.UseAuthentication();
 
@@ -52,5 +61,7 @@ app.UseMiddleware<JwtMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseSwaggerUI();
 
 app.Run();
