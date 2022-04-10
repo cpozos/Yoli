@@ -22,6 +22,9 @@ namespace Yoli.Core.Infraestructure.Services
 
         public async Task<bool> ValidateEmailConfirmationTokenAsync(string token)
         {
+            if (string.IsNullOrWhiteSpace(token))
+                return false;
+
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var result = await tokenHandler.ValidateTokenAsync(token, new TokenValidationParameters
