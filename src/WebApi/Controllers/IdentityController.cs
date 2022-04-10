@@ -5,7 +5,7 @@ using Yoli.Core.App.Services;
 using Yoli.Core.WebApi.Responses;
 using Yoli.Core.WebApi.Requests;
 using Yoli.Core.WebApi.Routes;
-using DataAnnotationsExtensions;
+using System.ComponentModel.DataAnnotations;
 
 namespace Yoli.Core.WebApi.Controllers
 {
@@ -71,7 +71,7 @@ namespace Yoli.Core.WebApi.Controllers
             if (request.SignInId.Contains("@"))
             {
                 // Get user by email
-                if (!new EmailAttribute().IsValid(request.SignInId))
+                if (!new EmailAddressAttribute().IsValid(request.SignInId))
                 {
                     return BadRequest();
                 }

@@ -1,6 +1,7 @@
 {
   "sdk": {
-    "version": "6.0.102",
-    "rollForward": "disable"
+    // Comment by now, since it is not required to be tied to an specific version
+    //"version": "6.0.102",
+    //"rollForward": "disable"
   }
 }

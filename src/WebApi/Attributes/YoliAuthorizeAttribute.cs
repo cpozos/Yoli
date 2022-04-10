@@ -7,16 +7,14 @@ using Yoli.Core.Domain.Entities;
 namespace Yoli.Core.WebApi.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class YoliAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
+    public class YoliAuthorizeAttribute : Attribute, IAuthorizationFilter
     {
-        private readonly ITokenService _tokenService;
         private readonly JsonResult _unauthorizedResult = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
-        public YoliAuthorizeAttribute(ITokenService tokenService)
+        public YoliAuthorizeAttribute()
         {
-            _tokenService = tokenService;
         }
 
-        public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
+        public void OnAuthorization(AuthorizationFilterContext context)
         {
             var user = context.HttpContext.Items["User"] as IUser;
             if (user == null)

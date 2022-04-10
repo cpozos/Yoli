@@ -41,11 +41,11 @@ namespace Yoli.Core.WebApi.Controllers
             };
 
             var result = await _userService.AddUserAsync(user);
-            if (!result)
+            if (!result.Succeeded)
                 throw new Exception("An error occured");
 
             // Generate token for validation
-            var token = await _tokeService.GenerateEmailConfirmationTokenAsync(user.Id.ToString());
+            var token = await _tokeService.GenerateEmailConfirmationTokenAsync(result.Data);
 
 
             // Send email to validate

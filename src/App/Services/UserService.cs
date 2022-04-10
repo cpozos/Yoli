@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using Yoli.Core.App.Dtos;
 using Yoli.Core.App.Entities;
 using Yoli.Core.App.Repositories;
 using Yoli.Core.Domain.Entities;
@@ -21,6 +22,16 @@ namespace Yoli.Core.App.Services
         public Task<Claim[]> GetClaims(int userId)
         {
             return Task.FromResult(new Claim[1] { new Claim(ClaimTypes.Name, "") });
+        }
+
+        public Task<Result<IUser>> AddUserAsync(UserDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateUserAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }
