@@ -5,6 +5,7 @@ using Yoli.Core.App.Services;
 using Yoli.Core.WebApi.Responses;
 using Yoli.Core.WebApi.Requests;
 using Yoli.Core.WebApi.Routes;
+using DataAnnotationsExtensions;
 
 namespace Yoli.Core.WebApi.Controllers
 {
@@ -70,8 +71,11 @@ namespace Yoli.Core.WebApi.Controllers
             if (request.SignInId.Contains("@"))
             {
                 // Get user by email
-                var email = new Email(request.SignInId);
-                user = await _userRepository.GetUserAsync(user => user.Email.Address == request.SignInId);
+                if (!new EmailAttribute().IsValid(request.SignInId))
+                {
+                    return BadRequest();
+                }
+                user = await _userRepository.GetUserAsync(user => user.Email == request.SignInId);
             }
             else
             {

@@ -29,14 +29,14 @@ namespace Yoli.Core.App.Services
             }
 
             var facebookUserInfo = await _facebookAuthService.GetUserInfoAsync(accessToken);
-            var user = await _userRepository.GetUserAsync(u => u.Email.Address == facebookUserInfo.Email);
+            var user = await _userRepository.GetUserAsync(u => u.Email == facebookUserInfo.Email);
             if (user is null)
             {
                 user = new User
                 {
                     FirstName = facebookUserInfo.FirstName,
                     LastName = facebookUserInfo.LastName,
-                    Email = new Email(facebookUserInfo.Email)
+                    Email = facebookUserInfo.Email
                 };
                 user = await _userRepository.AddUserAsync(user);
             }

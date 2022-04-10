@@ -7,8 +7,8 @@ namespace Yoli.Core.Infraestructure
     {
         private List<IUser> users = new List<IUser>
         {
-            new User { Id = 1, Email = new Email("1@gmail.com"), Name = "1"},
-            new Agency { Id = 2, Email = new Email("2@gmail.com"), Name = "2"},
+            new User { Id = 1, Email = "1@gmail.com", Name = "1"},
+            new Agency { Id = 2, Email = "2@gmail.com", Name = "2"},
         };
 
         public Task<IUser> AddUserAsync(IUser user)
