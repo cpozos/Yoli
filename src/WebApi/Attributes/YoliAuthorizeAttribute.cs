@@ -21,40 +21,10 @@ namespace Yoli.Core.WebApi.Attributes
             var user = context.HttpContext.Items["User"] as IUser;
             if (user == null)
             {
-                // not logged in
+                // It is not logged in
                 context.Result = _unauthorizedResult;
                 return;
             }
-
-            var auth = context.HttpContext.Request.Headers.Authorization[0];
-            if (await ValidateHeaderAsync(auth))
-            {
-                context.Result = _unauthorizedResult;
-                return;
-            }
-
-            var token = auth.Split()[1];
-            if (await _tokenService.ValidateEmailConfirmationTokenAsync(token))
-            {
-                context.Result = _unauthorizedResult;
-            }
-        }
-
-        private async Task<bool> ValidateHeaderAsync(string? authHeaderValue)
-        {
-            var result = await Task.Run(() =>
-            {
-                if (string.IsNullOrWhiteSpace(authHeaderValue) || !authHeaderValue.StartsWith("Bearer"))
-                    return false;
-
-                var words = authHeaderValue.Split("", StringSplitOptions.None);
-                if (words.Count() != 1)
-                    return false;
-
-                return true;
-            });
-
-            return result;
         }
     }
 }

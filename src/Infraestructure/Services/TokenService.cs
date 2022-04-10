@@ -1,5 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Text;
 using Yoli.Core.App.Services;
@@ -20,25 +22,43 @@ namespace Yoli.Core.Infraestructure.Services
             return Task.FromResult(token);
         }
 
-        public async Task<bool> ValidateEmailConfirmationTokenAsync(string token)
+        public bool GetClaimValue(JwtSecurityToken jwtSecurityToken, 
+            Func<Claim, bool> predicate, out string claimValue)
         {
+            claimValue = jwtSecurityToken.Claims.FirstOrDefault(predicate)?.Value ?? string.Empty;
+            return !string.IsNullOrWhiteSpace(claimValue);
+        }
+
+        public bool ValidateToken(string token, out JwtSecurityToken jwtSecurityToken)
+        {
+            jwtSecurityToken = new JwtSecurityToken();
+
             if (string.IsNullOrWhiteSpace(token))
                 return false;
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var result = await tokenHandler.ValidateTokenAsync(token, new TokenValidationParameters
+            try
             {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(_keyBytes),
-                ValidateAudience = true,
-                ValidAudience = Audiance,
-                ValidateIssuer = true,
-                ValidIssuer = Issuer,
-                ValidateLifetime = true
-            });
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(_keyBytes),
+                    ValidateAudience = true,
+                    ValidAudience = Audiance,
+                    ValidateIssuer = true,
+                    ValidIssuer = Issuer,
+                    ValidateLifetime = true
+                }, out SecurityToken validatedToken);
 
-            return result.IsValid;
+                jwtSecurityToken = (JwtSecurityToken)validatedToken;
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private string GenerateToken(IUser user)
@@ -71,21 +91,6 @@ namespace Yoli.Core.Infraestructure.Services
             {
                 return null;
             }
-        }
-
-        private JwtSecurityToken Verify(string token)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            tokenHandler
-               .ValidateToken(token, new TokenValidationParameters
-               {
-                   IssuerSigningKey = new SymmetricSecurityKey(_keyBytes),
-                   ValidateIssuerSigningKey = true,
-                   ValidateAudience = false,
-                   ValidateIssuer = false
-               }, out SecurityToken validatedToken);
-
-            return validatedToken as JwtSecurityToken;
         }
     }
 }
