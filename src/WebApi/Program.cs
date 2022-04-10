@@ -1,5 +1,7 @@
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
 using WebApi.Extensions;
+using WebApi.Swagger;
 using Yoli.Core.App.Repositories;
 using Yoli.Core.App.Services;
 using Yoli.Core.Infraestructure;
@@ -12,7 +14,25 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    // Configure Swagger
+    // "Bearer" is the name for this definition. Any other name could be used
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "JWT Authentication",
+        Description = "Use bearer token to authorize. Enter Bearer {token}",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Reference = new OpenApiReference
+        {
+            Id = JwtBearerDefaults.AuthenticationScheme,
+            Type = ReferenceType.SecurityScheme
+        }
+    });
+    c.OperationFilter<AddAuthHeaderOperationFilter>();
+});
 
 // Add services to the container.
 
@@ -48,11 +68,13 @@ typeof(Program).Assembly.ExportedTypes
     .ForEach(x => x.InstallServices(builder.Configuration, builder.Services));
 
 var app = builder.Build();
-app.UseSwagger();
+
 
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
 
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // app.UseAuthentication();
 
@@ -62,6 +84,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseSwaggerUI();
 
 app.Run();

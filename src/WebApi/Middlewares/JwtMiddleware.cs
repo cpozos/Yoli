@@ -50,7 +50,7 @@ public class JwtMiddleware
                 return false;
 
             var words = authHeaderValue.Split(" ", StringSplitOptions.None);
-            if (words.Length != 1)
+            if (words.Length != 2)
                 return false;
 
             return true;
