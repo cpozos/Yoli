@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Yoli.App.Services;
+using Yoli.Shared.Constants;
 
 public class JwtMiddleware
 {
@@ -31,7 +32,7 @@ public class JwtMiddleware
                 var result = await userService.GetUserAsync();   
                 if (result.Succeeded)
                 {
-                    context.Items["User"] = result.Data;
+                    context.Items[HttpContextItems.YoliUser] = result.Data;
                 }
             }
         }

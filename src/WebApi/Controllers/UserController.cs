@@ -1,7 +1,7 @@
 ﻿using Yoli.App.Services;
 using Microsoft.AspNetCore.Mvc;
 using Yoli.WebApi.Routes;
-using Yoli.WebApi.Attributes;
+using Yoli.Shared;
 
 namespace Yoli.WebApi.Controllers
 {
@@ -19,6 +19,7 @@ namespace Yoli.WebApi.Controllers
         [HttpGet("users/{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
+        
             var user = _userService.GetUserAsync();
             return Ok(user);
         }

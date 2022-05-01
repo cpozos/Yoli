@@ -15,5 +15,6 @@
     <ProjectReference Include="..\App\App.csproj" />
     <ProjectReference Include="..\Infraestructure\Infraestructure.csproj" />
 	<ProjectReference Include="..\Generators\Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+	<ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 </Project>
