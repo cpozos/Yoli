@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Yoli.WebApi.Routes;
 using Yoli.Shared;
+using Yoli.Shared.Extensions;
 
 namespace Yoli.WebApi.Controllers
 {
@@ -19,7 +20,7 @@ namespace Yoli.WebApi.Controllers
         [HttpGet("users/{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
-        
+            var currentUser = this.GetCurrentUser();
             var user = _userService.GetUserAsync();
             return Ok(user);
         }
