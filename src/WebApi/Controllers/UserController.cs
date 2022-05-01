@@ -1,9 +1,9 @@
-﻿using Yoli.Core.App.Services;
+﻿using Yoli.App.Services;
 using Microsoft.AspNetCore.Mvc;
-using Yoli.Core.WebApi.Routes;
-using Yoli.Core.WebApi.Attributes;
+using Yoli.WebApi.Routes;
+using Yoli.WebApi.Attributes;
 
-namespace Yoli.Core.WebApi.Controllers
+namespace Yoli.WebApi.Controllers
 {
     [Route(ApiRoutes.Base)]
     [ApiController]

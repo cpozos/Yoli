@@ -1,9 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Linq.Expressions;
 using System.Security.Claims;
-using Yoli.Core.Domain.Entities;
+using Yoli.Domain.Entities;
 
-namespace Yoli.Core.App.Services
+namespace Yoli.App.Services
 {
     public interface ITokenService
     {

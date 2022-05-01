@@ -4,10 +4,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Text;
-using Yoli.Core.App.Services;
-using Yoli.Core.Domain.Entities;
+using Yoli.App.Services;
+using Yoli.Domain.Entities;
 
-namespace Yoli.Core.Infraestructure.Services
+namespace Yoli.Infraestructure.Services
 {
     public class TokenService : ITokenService
     {

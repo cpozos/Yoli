@@ -1,9 +1,9 @@
-﻿using Yoli.Core.App.Entities;
-using Yoli.Core.App.Repositories;
-using Yoli.Core.Domain.Entities;
-using Yoli.Core.Domain.ValueObjects;
+﻿using Yoli.App.Entities;
+using Yoli.App.Repositories;
+using Yoli.Domain.Entities;
+using Yoli.Domain.ValueObjects;
 
-namespace Yoli.Core.App.Services
+namespace Yoli.App.Services
 {
     public class YoliIdentityService : IYoliIdentityService
     {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Yoli.Core.App.Services;
-using Yoli.Core.Domain.Entities;
+using Yoli.App.Services;
+using Yoli.Domain.Entities;
 
-namespace Yoli.Core.WebApi.Attributes
+namespace Yoli.WebApi.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class YoliAuthorizeAttribute : Attribute, IAuthorizationFilter

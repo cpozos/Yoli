@@ -1,6 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using Yoli.Core.App.Services;
+using Yoli.App.Services;
 
 public class JwtMiddleware
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Yoli.Core.WebApi.Requests
+namespace Yoli.WebApi.Requests
 {
     public record YoliSignUpRequest
     {

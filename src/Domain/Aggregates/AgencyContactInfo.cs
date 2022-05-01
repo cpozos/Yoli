@@ -1,7 +1,7 @@
-﻿using Yoli.Core.Domain.Entities;
-using Yoli.Core.Domain.ValueObjects;
+﻿using Yoli.Domain.Entities;
+using Yoli.Domain.ValueObjects;
 
-namespace Yoli.Core.Domain.Aggregates
+namespace Yoli.Domain.Aggregates
 {
     public class AgencyContactInfo : GeneralContactInfo
     {

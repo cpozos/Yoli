@@ -1,6 +1,6 @@
 ﻿using Domain.ValueObjects;
 
-namespace Yoli.Core.App.Dtos
+namespace Yoli.App.Dtos
 {
     public class PersonUserDto
     {

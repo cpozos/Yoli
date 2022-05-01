@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Yoli.Core.App.Repositories;
-using Yoli.Core.Domain.Entities;
-using Yoli.Core.App.Services;
-using Yoli.Core.WebApi.Requests;
-using Yoli.Core.WebApi.Routes;
+using Yoli.App.Repositories;
+using Yoli.Domain.Entities;
+using Yoli.App.Services;
+using Yoli.WebApi.Requests;
+using Yoli.WebApi.Routes;
 using Domain.ValueObjects;
-using Yoli.Core.App.Dtos;
+using Yoli.App.Dtos;
 
-namespace Yoli.Core.WebApi.Controllers
+namespace Yoli.WebApi.Controllers
 {
     [Route(ApiRoutes.Root)]
     [ApiController]
@@ -46,7 +46,6 @@ namespace Yoli.Core.WebApi.Controllers
 
             // Generate token for validation
             var token = await _tokeService.GenerateEmailConfirmationTokenAsync(result.Data);
-
 
             // Send email to validate
             var link = Url.Action(nameof(VerifyEmail), "Signup", new { userId = user.Id, code = token }, Request.Scheme, Request.Host.ToString());

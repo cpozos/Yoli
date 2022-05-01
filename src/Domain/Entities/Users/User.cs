@@ -1,7 +1,7 @@
-﻿using Yoli.Core.Domain.Aggregates;
-using Yoli.Core.Domain.ValueObjects;
+﻿using Yoli.Domain.Aggregates;
+using Yoli.Domain.ValueObjects;
 
-namespace Yoli.Core.Domain.Entities
+namespace Yoli.Domain.Entities
 {
     public class User : Person, IUser
     {

@@ -1,4 +1,4 @@
-﻿namespace Yoli.Core.WebApi.Routes
+﻿namespace Yoli.WebApi.Routes
 {
     public static class ApiRoutes
     {

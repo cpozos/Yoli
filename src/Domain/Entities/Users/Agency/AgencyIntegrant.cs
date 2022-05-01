@@ -1,5 +1,5 @@
-﻿using Yoli.Core.Domain.Entities;
-using Yoli.Core.Domain.ValueObjects;
+﻿using Yoli.Domain.Entities;
+using Yoli.Domain.ValueObjects;
 
 namespace Domain.Entities.Users
 {

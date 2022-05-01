@@ -1,8 +1,8 @@
-﻿using Yoli.Core.App.Repositories;
-using Yoli.Core.Domain.Entities;
-using Yoli.Core.Domain.ValueObjects;
+﻿using Yoli.App.Repositories;
+using Yoli.Domain.Entities;
+using Yoli.Domain.ValueObjects;
 
-namespace Yoli.Core.Infraestructure
+namespace Yoli.Infraestructure
 {
     public class UserRepository : IUserRepository
     {

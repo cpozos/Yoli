@@ -1,6 +1,6 @@
-﻿using Yoli.Core.App.Extensions;
+﻿using Yoli.App.Extensions;
 
-namespace Yoli.Core.App
+namespace Yoli.App
 {
     public record Result<T>
     {

@@ -1,4 +1,4 @@
-﻿namespace Yoli.Core.App.Entities
+﻿namespace Yoli.App.Entities
 {
     public class YoliAuthenticationResult
     {

@@ -1,6 +1,6 @@
-﻿using Yoli.Core.Domain.Entities;
+﻿using Yoli.Domain.Entities;
 
-namespace Yoli.Core.Domain.ValueObjects
+namespace Yoli.Domain.ValueObjects
 {
     public class AgencyRole
     {

@@ -36,7 +36,7 @@ namespace SourceGenerator
 
             var className = "GeneratedIdentityApiRoutes";
             var sourceBuilder = new StringBuilder();
-            sourceBuilder.AppendLine("namespace Yoli.Core.WebApi.Routes");
+            sourceBuilder.AppendLine("namespace Yoli.WebApi.Routes");
             sourceBuilder.AppendLine("{");
             sourceBuilder.AppendLine($"\tpublic static class {className}");
             sourceBuilder.AppendLine("\t{");

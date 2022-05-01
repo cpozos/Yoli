@@ -1,6 +1,6 @@
-﻿using Yoli.Core.App.External.Contracts;
-using Yoli.Core.App.Options;
-using Yoli.Core.App.Services;
+﻿using Yoli.App.External.Contracts;
+using Yoli.App.Options;
+using Yoli.App.Services;
 using Newtonsoft.Json;
 
 namespace Infraestructure.Services

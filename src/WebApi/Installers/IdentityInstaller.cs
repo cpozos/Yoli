@@ -1,8 +1,8 @@
-﻿using Yoli.Core.App.Repositories;
-using Yoli.Core.App.Services;
-using Yoli.Core.Infraestructure;
+﻿using Yoli.App.Repositories;
+using Yoli.App.Services;
+using Yoli.Infraestructure;
 
-namespace Yoli.Core.WebApi.Installers
+namespace Yoli.WebApi.Installers
 {
     public class IdentityInstaller : IInstaller
     {

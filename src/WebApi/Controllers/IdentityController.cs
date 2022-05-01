@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Yoli.Core.App.Repositories;
-using Yoli.Core.Domain.Entities;
-using Yoli.Core.App.Services;
-using Yoli.Core.WebApi.Responses;
-using Yoli.Core.WebApi.Requests;
-using Yoli.Core.WebApi.Routes;
+using Yoli.App.Repositories;
+using Yoli.Domain.Entities;
+using Yoli.App.Services;
+using Yoli.WebApi.Responses;
+using Yoli.WebApi.Requests;
+using Yoli.WebApi.Routes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Yoli.Core.WebApi.Controllers
+namespace Yoli.WebApi.Controllers
 {
     [Route(ApiRoutes.Root)]
     [ApiController]

@@ -1,9 +1,9 @@
 ﻿using System.Security.Claims;
-using Yoli.Core.App.Dtos;
-using Yoli.Core.App.Entities;
-using Yoli.Core.Domain.Entities;
+using Yoli.App.Dtos;
+using Yoli.App.Entities;
+using Yoli.Domain.Entities;
 
-namespace Yoli.Core.App.Services
+namespace Yoli.App.Services
 {
     public interface IUserService
     {

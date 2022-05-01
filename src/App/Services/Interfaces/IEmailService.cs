@@ -1,4 +1,4 @@
-﻿namespace Yoli.Core.App.Services
+﻿namespace Yoli.App.Services
 {
     public interface IEmailService
     {
