@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using WebApi.Extensions;
 using WebApi.Swagger;
-using Yoli.Core.App.Repositories;
-using Yoli.Core.App.Services;
-using Yoli.Core.Infraestructure;
-using Yoli.Core.Infraestructure.Services;
-using Yoli.Core.WebApi.Installers;
+using Yoli.App.Repositories;
+using Yoli.App.Services;
+using Yoli.Infraestructure;
+using Yoli.Infraestructure.Services;
+using Yoli.WebApi.Installers;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserRepository, UserRepository>();

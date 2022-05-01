@@ -1,4 +1,4 @@
-﻿namespace Yoli.Core.App.Extensions
+﻿namespace Yoli.App.Extensions
 {
     public static class ObjectExtensions
     {

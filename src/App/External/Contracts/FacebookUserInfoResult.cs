@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Yoli.Core.App.External.Contracts
+namespace Yoli.App.External.Contracts
 {
     public class FacebookUserInfoResult
     {

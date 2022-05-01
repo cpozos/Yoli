@@ -1,10 +1,11 @@
-﻿using Yoli.Core.Domain.Entities;
+﻿using Yoli.Domain.Entities;
 
-namespace Yoli.Core.App.Repositories
+namespace Yoli.App.Repositories
 {
     public interface IUserRepository
     {
-        Task<IUser> GetUserAsync(Func<IUser, bool> filter);
-        Task<IUser> AddUserAsync(IUser user);
+        Task<User> GetUserAsync(Func<User, bool> filter);
+        Task<User> AddUserAsync(User user);
+        Task<Agency> AddAgencyAsync(Agency agency);
     }
 }

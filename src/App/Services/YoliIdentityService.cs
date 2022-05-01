@@ -1,8 +1,9 @@
-﻿using Yoli.Core.App.Entities;
-using Yoli.Core.App.Repositories;
-using Yoli.Core.Domain.Entities;
+﻿using Yoli.App.Entities;
+using Yoli.App.Repositories;
+using Yoli.Domain.Entities;
+using Yoli.Domain.ValueObjects;
 
-namespace Yoli.Core.App.Services
+namespace Yoli.App.Services
 {
     public class YoliIdentityService : IYoliIdentityService
     {
@@ -29,14 +30,14 @@ namespace Yoli.Core.App.Services
             }
 
             var facebookUserInfo = await _facebookAuthService.GetUserInfoAsync(accessToken);
-            var user = await _userRepository.GetUserAsync(u => u.Email == facebookUserInfo.Email);
+            var user = await _userRepository.GetUserAsync(u => u.Email.Email == facebookUserInfo.Email);
             if (user is null)
             {
                 user = new User
                 {
                     FirstName = facebookUserInfo.FirstName,
                     LastName = facebookUserInfo.LastName,
-                    Email = facebookUserInfo.Email
+                    Email = new EmailAddress(facebookUserInfo.Email, true)
                 };
                 user = await _userRepository.AddUserAsync(user);
             }

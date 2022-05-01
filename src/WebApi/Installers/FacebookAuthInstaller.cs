@@ -1,7 +1,7 @@
-﻿using Yoli.Core.App.Options;
-using Yoli.Core.App.Services;
+﻿using Yoli.App.Options;
+using Yoli.App.Services;
 using Infraestructure.Services;
-using Yoli.Core.WebApi.Installers;
+using Yoli.WebApi.Installers;
 
 namespace WebApi.Installations
 {

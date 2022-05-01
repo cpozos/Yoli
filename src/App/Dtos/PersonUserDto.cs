@@ -1,8 +1,8 @@
 ﻿using Domain.ValueObjects;
 
-namespace Yoli.Core.App.Dtos
+namespace Yoli.App.Dtos
 {
-    public class UserDto
+    public class PersonUserDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

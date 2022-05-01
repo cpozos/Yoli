@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Yoli.Core.WebApi.Responses
+namespace Yoli.WebApi.Responses
 {
     public class AuthenticationResponse : IActionResult
     {

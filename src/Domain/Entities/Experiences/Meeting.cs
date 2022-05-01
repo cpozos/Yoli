@@ -1,4 +1,6 @@
-﻿namespace Yoli.Core.Domain.Entities
+﻿using Yoli.Domain.ValueObjects;
+
+namespace Yoli.Domain.Entities
 {
     public class Meeting
     {

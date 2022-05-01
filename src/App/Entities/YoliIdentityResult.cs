@@ -1,6 +1,6 @@
-﻿using Yoli.Core.Domain.Entities;
+﻿using Yoli.Domain.Entities;
 
-namespace Yoli.Core.App.Entities
+namespace Yoli.App.Entities
 {
     public class YoliIdentityResult
     { 

@@ -1,9 +1,10 @@
 ﻿using Domain.ValueObjects;
 
-namespace Yoli.Core.Domain.Entities
+namespace Yoli.Domain.Entities
 {
     public class Person
     {
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string LastName { get; set; }

@@ -1,6 +1,6 @@
-﻿using Yoli.Core.App.Entities;
+﻿using Yoli.App.Entities;
 
-namespace Yoli.Core.App.Services
+namespace Yoli.App.Services
 {
     public interface IYoliIdentityService
     {

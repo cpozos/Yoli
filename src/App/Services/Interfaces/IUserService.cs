@@ -1,13 +1,13 @@
 ﻿using System.Security.Claims;
-using Yoli.Core.App.Dtos;
-using Yoli.Core.App.Entities;
-using Yoli.Core.Domain.Entities;
+using Yoli.App.Dtos;
+using Yoli.App.Entities;
+using Yoli.Domain.Entities;
 
-namespace Yoli.Core.App.Services
+namespace Yoli.App.Services
 {
     public interface IUserService
     {
-        Task<Result<IUser>> AddUserAsync(UserDto dto);
+        Task<Result<IUser>> AddUserAsync(PersonUserDto dto);
         Task<bool> UpdateUserAsync();
 
         // TODO: Replace adding Func<IUser,bool>

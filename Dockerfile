@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY /Yoli.Core.sln .
+COPY /Yoli.sln .
 COPY /src/Generators/Generators.csproj ./src/Generators/
 COPY /src/Domain/Domain.csproj ./src/Domain/
 COPY /src/App/App.csproj ./src/App/
