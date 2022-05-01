@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
-using WebApi.Extensions;
 using WebApi.Swagger;
 using Yoli.App.Repositories;
 using Yoli.App.Services;
 using Yoli.Infraestructure;
 using Yoli.Infraestructure.Services;
+using Yoli.Shared.Extensions;
 using Yoli.WebApi.Installers;
 
 var builder = WebApplication.CreateBuilder(args);

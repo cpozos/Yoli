@@ -1,4 +1,4 @@
-﻿namespace WebApi.Extensions
+﻿namespace Yoli.Shared.Extensions
 {
     public static class LinqExtensions
     {
