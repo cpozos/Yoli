@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Domain.ValueObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Yoli.Domain.Entities;
@@ -9,9 +10,11 @@ namespace Yoli.Shared
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class YoliAuthorizeAttribute : Attribute, IAuthorizationFilter
     {
-        public YoliAuthorizeAttribute()
-        {
+        private readonly IList<Role> _roles;
 
+        public YoliAuthorizeAttribute(params Role[] roles)
+        {
+            _roles = roles ?? new Role[] { };
         }
 
         public void OnAuthorization(AuthorizationFilterContext context)
@@ -26,6 +29,18 @@ namespace Yoli.Shared
             {
                 // It is not logged in
                 context.Result = new UnauthorizedResult();
+                return;
+            }
+
+            // TODO: Get roles for the user
+            Role userRole = new Role
+            {
+                Name = ""
+            };
+
+            if (_roles.Any() && !_roles.Contains(userRole))
+            {
+                context.Result = new ForbidResult();
                 return;
             }
         }
