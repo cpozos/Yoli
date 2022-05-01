@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
+using Shared.Middlewares;
+using WebApi.Settings;
 using WebApi.Swagger;
 using Yoli.App.Repositories;
 using Yoli.App.Services;
@@ -9,6 +11,10 @@ using Yoli.Shared.Extensions;
 using Yoli.WebApi.Installers;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Settings
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
@@ -71,12 +77,15 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
+
 app.UseHttpsRedirection();
 
 app.UseSwagger();
 app.UseSwaggerUI();
 
 // app.UseAuthentication();
+
+app.UseMiddleware<GlobalErrorHandlerMiddleware>();
 
 app.UseMiddleware<JwtMiddleware>();
 
