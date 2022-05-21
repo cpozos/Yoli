@@ -1,7 +1,7 @@
 ﻿namespace Yoli.App.Services
 {
-    public interface IEmailService
-    {
-        Task<bool> SendAsync(string mailTo, string subject, string message, bool isHtml = false);
-    }
+    //public interface IEmailService
+    //{
+    //    Task<bool> SendAsync(string mailTo, string subject, string message, bool isHtml = false);
+    //}
 }

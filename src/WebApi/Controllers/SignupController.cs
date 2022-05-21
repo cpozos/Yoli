@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Yoli.App.Repositories;
-using Yoli.Domain.Entities;
 using Yoli.App.Services;
 using Yoli.WebApi.Requests;
 using Yoli.WebApi.Routes;
 using Domain.ValueObjects;
 using Yoli.App.Dtos;
+using NETCore.MailKit.Core;
 
 namespace Yoli.WebApi.Controllers
 {
-    [Route(ApiRoutes.Root)]
+    [Route($"{ApiRoutes.Root}/{ApiVersion.V1}")]
     [ApiController]
     public class SignupController : ControllerBase
     {
@@ -27,12 +26,13 @@ namespace Yoli.WebApi.Controllers
         }
 
 
-        [HttpPost($"{ApiVersion.V1}/{ApiRoutes.IdentityRoutes.SignupYoli}")]
+        [HttpPost(ApiRoutes.IdentityRoutes.SignupYoli)]
         public async Task<IActionResult> SignUp([FromBody] YoliSignUpRequest request)
         {
             // Save data
             var user = new PersonUserDto
             {
+                Name = $"{request.FirstName} {request.SecondName} {request.LastName}",
                 FirstName = request.FirstName,
                 SecondName = request.SecondName,
                 LastName = request.LastName,
@@ -48,14 +48,16 @@ namespace Yoli.WebApi.Controllers
             var token = await _tokeService.GenerateEmailConfirmationTokenAsync(result.Data);
 
             // Send email to validate
-            var link = Url.Action(nameof(VerifyEmail), "Signup", new { userId = user.Id, code = token }, Request.Scheme, Request.Host.ToString());
-            await _emailService.SendAsync("test@test.com", "Email verify", $"<a href=\"{link}\">Click to verify</a>", true);
+
+            var frontEndUrLink = 
+                Url.Action(nameof(VerifyEmail), "Signup", new { token = token }, Request.Scheme, Request.Host.ToString());
+            await _emailService.SendAsync("test@test.com", "Email verify", $"<a href=\"{frontEndUrLink}\">Click to verify</a>", true);
 
             return Ok();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> VerifyEmail([FromRoute] VerifyEmailRequest request)
+        [HttpGet(ApiRoutes.IdentityRoutes.VerifyEmail)]
+        public async Task<IActionResult> VerifyEmail([FromQuery] VerifyEmailRequest request)
         {
             var user = await _userService.GetUserAsync(); // TODO: GetUserAsync(u => u.Id == userId)
 
@@ -71,6 +73,5 @@ namespace Yoli.WebApi.Controllers
             //TODO: Redirects to trusted signup page
             return Ok();
         }
-
     }
 }

@@ -6,7 +6,7 @@ using Yoli.Shared.Extensions;
 
 namespace Yoli.WebApi.Controllers
 {
-    [Route(ApiRoutes.Base)]
+    [Route($"{ApiRoutes.Root}/{ApiVersion.V1}")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -28,6 +28,7 @@ namespace Yoli.WebApi.Controllers
         [HttpGet("users2/{id}")]
         public async Task<IActionResult> GetUser2(int id)
         {
+            var currentUser = this.GetCurrentUser();
             var user = _userService.GetUserAsync();
             return Ok(user);
         }

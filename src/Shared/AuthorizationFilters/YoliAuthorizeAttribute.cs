@@ -12,6 +12,8 @@ namespace Yoli.Shared
     {
         private readonly IList<Role> _roles;
 
+        public YoliAuthorizeAttribute() : this(Array.Empty<Role>()) { }
+
         public YoliAuthorizeAttribute(params Role[] roles)
         {
             _roles = roles ?? new Role[] { };

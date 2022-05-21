@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Yoli.WebApi.Controllers
 {
-    [Route(ApiRoutes.Root)]
+    [Route($"{ApiRoutes.Root}/{ApiVersion.V1}")]
     [ApiController]
     public class IdentityController : ControllerBase
     {
@@ -26,7 +26,7 @@ namespace Yoli.WebApi.Controllers
             _yoliAuthService = yoliAuthService;
         }
 
-        [HttpPost($"{ApiVersion.V1}/{ApiRoutes.IdentityRoutes.SigninFacebook}")]
+        [HttpPost(ApiRoutes.IdentityRoutes.SigninFacebook)]
         public async Task<AuthenticationResponse> SignInFacebbok([FromBody] FacebookSignInRequest request)
         {
             var result = await _yoliIdentityService.SigninUsingFacebookTask(request.AccessToken);
@@ -56,7 +56,7 @@ namespace Yoli.WebApi.Controllers
 
         
 
-        [HttpPost($"{ApiVersion.V1}/{ApiRoutes.IdentityRoutes.SigninYoli}")]
+        [HttpPost(ApiRoutes.IdentityRoutes.SigninYoli)]
         public async Task<IActionResult> SignIn([FromBody] YoliSignInRequest request)
         {
             if (request is null)

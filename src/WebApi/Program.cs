@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Shared.Middlewares;
+using WebApi.Middlewares;
 using WebApi.Settings;
 using WebApi.Swagger;
 using Yoli.App.Repositories;
@@ -10,13 +11,26 @@ using Yoli.Infraestructure.Services;
 using Yoli.Shared.Extensions;
 using Yoli.WebApi.Installers;
 
+
+using NETCore.MailKit.Extensions;
+using NETCore.MailKit.Infrastructure.Internal;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Settings
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
+
+// Services
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddMailKit(config =>
+{
+    var mailKitOptions = builder.Configuration.GetSection("Email").Get<MailKitOptions>();
+    config.UseMailKit(mailKitOptions);
+    // For debug purposes
+    // https://github.com/ChangemakerStudios/Papercut-SMTP
+});
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -39,8 +53,6 @@ builder.Services.AddSwaggerGen(c =>
     });
     c.OperationFilter<AddAuthHeaderOperationFilter>();
 });
-
-// Add services to the container.
 
 builder.Services.AddControllers();
 

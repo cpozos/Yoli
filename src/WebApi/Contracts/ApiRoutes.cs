@@ -10,6 +10,7 @@
             public const string SignupYoli = "signup/yoli";
             public const string SigninYoli = "signin/yoli";
             public const string SigninFacebook = "signin/facebook";
+            public const string VerifyEmail = "signup/verify-email";
         }        
     }
     public static class ApiVersion

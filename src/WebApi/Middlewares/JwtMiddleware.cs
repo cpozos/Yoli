@@ -3,6 +3,8 @@ using System.Text;
 using Yoli.App.Services;
 using Yoli.Shared.Constants;
 
+namespace WebApi.Middlewares;
+
 public class JwtMiddleware
 {
     private readonly RequestDelegate _next;
