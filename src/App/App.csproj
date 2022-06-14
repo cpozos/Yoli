@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Auth\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

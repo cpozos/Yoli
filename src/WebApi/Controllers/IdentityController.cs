@@ -6,6 +6,7 @@ using Yoli.WebApi.Responses;
 using Yoli.WebApi.Requests;
 using Yoli.WebApi.Routes;
 using System.ComponentModel.DataAnnotations;
+using Yoli.WebApi.Validations;
 
 namespace Yoli.WebApi.Controllers
 {
@@ -16,14 +17,18 @@ namespace Yoli.WebApi.Controllers
         private IUserRepository _userRepository;
         private readonly IYoliIdentityService _yoliIdentityService;
         private readonly IYoliAuthService _yoliAuthService;
+        private readonly IYoliValidatorFactory _validatorFactory;
+
         public IdentityController(
             IUserRepository userRepository,
             IYoliIdentityService yoliIdentityService,
-            IYoliAuthService yoliAuthService)
+            IYoliAuthService yoliAuthService,
+            IYoliValidatorFactory validatorFactory)
         {
             _userRepository = userRepository;
             _yoliIdentityService = yoliIdentityService;
             _yoliAuthService = yoliAuthService;
+            _validatorFactory = validatorFactory;
         }
 
         [HttpPost(ApiRoutes.IdentityRoutes.SigninFacebook)]
@@ -82,6 +87,13 @@ namespace Yoli.WebApi.Controllers
             }
 
             return user is null ? BadRequest() : Ok(new SigninResponse(user));
+        }
+
+        private async Task<bool> Validate<T>(T request)
+        {
+            var validator = _validatorFactory.GetValidator<T>();
+            var result = await validator.ValidateAsync(request);
+            return !result.IsValid;
         }
     }
 }

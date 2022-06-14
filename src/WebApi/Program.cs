@@ -14,6 +14,9 @@ using Yoli.WebApi.Installers;
 
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
+using FluentValidation;
+using Yoli.WebApi.Requests;
+using Yoli.WebApi.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +34,8 @@ builder.Services.AddMailKit(config =>
     // For debug purposes
     // https://github.com/ChangemakerStudios/Papercut-SMTP
 });
+
+builder.Services.AddTransient<IValidator<YoliSignInRequest>, YoliSignInRequestValidator>();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
