@@ -8,6 +8,8 @@ namespace Yoli.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public EmailAddress Email { get; set; }
+        public string Password { get; set; }
+        public string Salt { get; set; }
         public IEnumerable<Person> Integrants { get; set; }
         public AgencyContactInfo ContactInfo { get; set; }
         public IEnumerable<Agency> SubAgencies { get; set; }

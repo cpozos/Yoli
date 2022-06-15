@@ -7,6 +7,8 @@ namespace Yoli.Domain.Entities
     {
         public string Name { get; set; }
         public EmailAddress Email { get; set; }
+        public string Password { get; set; }
+        public string Salt { get; set; }
         public PersonContactInfo ContactInformation { get; set; }
     }
 }
