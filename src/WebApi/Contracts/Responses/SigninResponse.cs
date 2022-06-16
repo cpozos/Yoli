@@ -6,11 +6,13 @@ namespace Yoli.WebApi.Responses
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Token { get; set; }
 
-        public SigninResponse(IUser user)
+        public SigninResponse(IUser user, string token)
         {
             Id = user.Id;
             Name = user.Name;
+            Token = token;
         }
     }
 }

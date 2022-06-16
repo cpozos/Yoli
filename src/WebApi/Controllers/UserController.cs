@@ -32,5 +32,12 @@ namespace Yoli.WebApi.Controllers
             var user = _userService.GetUserAsync();
             return Ok(user);
         }
+
+        [HttpGet("users/policy")]
+        [YoliAuthorize(YoliPolicy.MustHaveAccessPolicy)]
+        public async Task<IActionResult> TestPolicy()
+        {
+            return Ok("Yes");
+        }
     }
 }

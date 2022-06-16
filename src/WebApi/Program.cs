@@ -17,6 +17,9 @@ using NETCore.MailKit.Infrastructure.Internal;
 using FluentValidation;
 using Yoli.WebApi.Requests;
 using Yoli.WebApi.Validations;
+using Microsoft.AspNetCore.Authorization;
+using Shared.Authorization.RequirementsHandlers;
+using Yoli.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +39,14 @@ builder.Services.AddMailKit(config =>
 });
 
 builder.Services.AddTransient<IValidator<YoliSignInRequest>, YoliSignInRequestValidator>();
+builder.Services.AddTransient<IYoliValidatorFactory, YoliValidatorFactory>();
+
+// Atuh
+builder.Services.AddSingleton<IAuthorizationHandler, HasAccessHandler>();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(YoliPolicy.MustHaveAccessPolicy, policy => policy.Requirements.Add(new HasAccessRequirement()));
+});
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -100,11 +111,13 @@ app.UseHttpsRedirection();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-// app.UseAuthentication();
+app.UseMiddleware<JwtMiddleware>();
+
+app.UseAuthentication();
 
 app.UseMiddleware<GlobalErrorHandlerMiddleware>();
 
-app.UseMiddleware<JwtMiddleware>();
+
 
 app.UseAuthorization();
 

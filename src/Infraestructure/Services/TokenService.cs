@@ -61,7 +61,7 @@ namespace Yoli.Infraestructure.Services
             return true;
         }
 
-        private string GenerateToken(IUser user)
+        public string GenerateToken(IUser user)
         {
             var claims = new[]
             {

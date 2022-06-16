@@ -18,17 +18,20 @@ namespace Yoli.WebApi.Controllers
         private readonly IYoliIdentityService _yoliIdentityService;
         private readonly IYoliAuthService _yoliAuthService;
         private readonly IYoliValidatorFactory _validatorFactory;
+        private readonly ITokenService _tokenService;
 
         public IdentityController(
             IUserRepository userRepository,
             IYoliIdentityService yoliIdentityService,
             IYoliAuthService yoliAuthService,
-            IYoliValidatorFactory validatorFactory)
+            IYoliValidatorFactory validatorFactory,
+            ITokenService tokenService)
         {
             _userRepository = userRepository;
             _yoliIdentityService = yoliIdentityService;
             _yoliAuthService = yoliAuthService;
             _validatorFactory = validatorFactory;
+            _tokenService = tokenService;
         }
 
         [HttpPost(ApiRoutes.IdentityRoutes.SigninFacebook)]
@@ -86,7 +89,15 @@ namespace Yoli.WebApi.Controllers
                 user = await _userRepository.GetUserAsync(user => user.Name == request.SignInId);
             }
 
-            return user is null ? BadRequest() : Ok(new SigninResponse(user));
+            return user is null ? BadRequest() : Ok(new SigninResponse(user, _tokenService.GenerateToken(user)));
+        }
+
+        [HttpPost("fakeSignIn")]
+        public async Task<IActionResult> FakeSignIn([FromBody] YoliSignInRequest request)
+        {
+            // Get user bu user name
+            var user = await _userRepository.GetUserAsync(user => user.Name == "1");
+            return user is null ? BadRequest() : Ok(new SigninResponse(user, _tokenService.GenerateToken(user)));
         }
 
         private async Task<bool> Validate<T>(T request)

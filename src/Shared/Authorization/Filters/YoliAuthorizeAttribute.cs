@@ -8,15 +8,18 @@ using Yoli.Shared.Constants;
 namespace Yoli.Shared
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class YoliAuthorizeAttribute : Attribute, IAuthorizationFilter
+    public class YoliAuthorizeAttribute : AuthorizeAttribute
     {
-        private readonly IList<Role> _roles;
+        private readonly IList<string> _roles;
 
-        public YoliAuthorizeAttribute() : this(Array.Empty<Role>()) { }
-
-        public YoliAuthorizeAttribute(params Role[] roles)
+        public YoliAuthorizeAttribute() : this(Array.Empty<string>(), null) { }
+        public YoliAuthorizeAttribute(string[] roles) : this(roles, null) { }
+        public YoliAuthorizeAttribute(string policy) : this(null, policy) { }
+        public YoliAuthorizeAttribute(string[]? roles, string? policy)
         {
-            _roles = roles ?? new Role[] { };
+            _roles = roles ?? Array.Empty<string>();
+            Roles = roles?.Length > 0 ? string.Join(",", roles) : null;
+            Policy = policy;
         }
 
         public void OnAuthorization(AuthorizationFilterContext context)
@@ -35,10 +38,7 @@ namespace Yoli.Shared
             }
 
             // TODO: Get roles for the user
-            Role userRole = new Role
-            {
-                Name = ""
-            };
+            string userRole = "";
 
             if (_roles.Any() && !_roles.Contains(userRole))
             {
