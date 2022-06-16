@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Yoli.Shared.Constants;
 using Yoli.Domain.Entities;
+using Yoli.WebApi.Authorization;
 
-namespace Yoli.Shared.Extensions
+namespace Yoli.WebApi.Extensions
 {
     public static class ControllerExtensions
     {

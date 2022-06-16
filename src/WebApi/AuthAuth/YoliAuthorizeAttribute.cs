@@ -1,22 +1,28 @@
-﻿using Domain.ValueObjects;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using WebApi.Middlewares;
 using Yoli.Domain.Entities;
 using Yoli.Shared.Constants;
 
-namespace Yoli.Shared
+namespace Yoli.WebApi.Authorization
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class YoliAuthorizeAttribute : Attribute, IAuthorizationFilter
+    public class YoliAuthorizeAttribute : Attribute, IAuthorizationFilter, IAuthorizeData
     {
-        private readonly IList<Role> _roles;
+        private readonly IList<string> _roles;
+        public string? AuthenticationSchemes { get; set; }
+        public string? Policy { get; set; }
+        public string? Roles { get; set; }
 
-        public YoliAuthorizeAttribute() : this(Array.Empty<Role>()) { }
-
-        public YoliAuthorizeAttribute(params Role[] roles)
+        public YoliAuthorizeAttribute() : this(Array.Empty<string>(), null) { }
+        public YoliAuthorizeAttribute(string[] roles) : this(roles, null) { }
+        public YoliAuthorizeAttribute(string policy) : this(null, policy) { }
+        public YoliAuthorizeAttribute(string[]? roles, string? policy)
         {
-            _roles = roles ?? new Role[] { };
+            _roles = roles ?? Array.Empty<string>();
+            Roles = roles?.Length > 0 ? string.Join(",", roles) : null;
+            Policy = policy;
         }
 
         public void OnAuthorization(AuthorizationFilterContext context)
@@ -35,10 +41,7 @@ namespace Yoli.Shared
             }
 
             // TODO: Get roles for the user
-            Role userRole = new Role
-            {
-                Name = ""
-            };
+            string userRole = "";
 
             if (_roles.Any() && !_roles.Contains(userRole))
             {
