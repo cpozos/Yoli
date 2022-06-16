@@ -116,7 +116,7 @@ app.UseSwaggerUI();
 
 app.UseMiddleware<GlobalErrorHandlerMiddleware>();
 
-app.UseAuthentication(); //app.UseMiddleware<JwtMiddleware>();
+app.UseAuthentication();
 
 app.UseAuthorization();
 
