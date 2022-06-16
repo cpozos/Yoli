@@ -1,4 +1,5 @@
-﻿namespace Yoli.Shared
+﻿namespace Yoli.App.Authorization
+
 {
     public class YoliPolicy
     {

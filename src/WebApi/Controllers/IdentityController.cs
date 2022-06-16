@@ -7,6 +7,7 @@ using Yoli.WebApi.Requests;
 using Yoli.WebApi.Routes;
 using System.ComponentModel.DataAnnotations;
 using Yoli.WebApi.Validations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Yoli.WebApi.Controllers
 {
@@ -92,6 +93,7 @@ namespace Yoli.WebApi.Controllers
             return user is null ? BadRequest() : Ok(new SigninResponse(user, _tokenService.GenerateToken(user)));
         }
 
+        [AllowAnonymous]
         [HttpPost("fakeSignIn")]
         public async Task<IActionResult> FakeSignIn([FromBody] YoliSignInRequest request)
         {

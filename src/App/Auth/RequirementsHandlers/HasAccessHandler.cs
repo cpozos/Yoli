@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace Shared.Authorization.RequirementsHandlers
+namespace Yoli.App.Authorization
 {
     public class HasAccessRequirement : IAuthorizationRequirement
     {
@@ -11,6 +11,7 @@ namespace Shared.Authorization.RequirementsHandlers
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, HasAccessRequirement requirement)
         {
+            var user = context.User;
             return Task.CompletedTask;
         }
     }

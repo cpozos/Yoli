@@ -1,8 +1,10 @@
 ﻿using Yoli.App.Services;
 using Microsoft.AspNetCore.Mvc;
 using Yoli.WebApi.Routes;
-using Yoli.Shared;
-using Yoli.Shared.Extensions;
+using Yoli.WebApi.Authorization;
+using Yoli.WebApi.Extensions;
+using Microsoft.AspNetCore.Authorization;
+using Yoli.App.Authorization;
 
 namespace Yoli.WebApi.Controllers
 {
@@ -34,7 +36,7 @@ namespace Yoli.WebApi.Controllers
         }
 
         [HttpGet("users/policy")]
-        [YoliAuthorize(YoliPolicy.MustHaveAccessPolicy)]
+        [Authorize(YoliPolicy.MustHaveAccessPolicy)]
         public async Task<IActionResult> TestPolicy()
         {
             return Ok("Yes");

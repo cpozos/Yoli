@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Shared.Middlewares;
-using WebApi.Middlewares;
 using WebApi.Settings;
 using WebApi.Swagger;
 using Yoli.App.Repositories;
@@ -18,8 +17,8 @@ using FluentValidation;
 using Yoli.WebApi.Requests;
 using Yoli.WebApi.Validations;
 using Microsoft.AspNetCore.Authorization;
-using Shared.Authorization.RequirementsHandlers;
-using Yoli.Shared;
+using Yoli.WebApi.Authentication;
+using Yoli.App.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,7 +40,18 @@ builder.Services.AddMailKit(config =>
 builder.Services.AddTransient<IValidator<YoliSignInRequest>, YoliSignInRequestValidator>();
 builder.Services.AddTransient<IYoliValidatorFactory, YoliValidatorFactory>();
 
-// Atuh
+// Authentication
+builder.Services
+    .AddAuthentication(o => 
+    {
+        o.DefaultScheme = SchemesNames.TokenAuthenticationDefaultScheme;
+        o.RequireAuthenticatedSignIn = true;
+    })
+    .AddScheme<YoliAuthenticationOptions, YoliAuthenticationHandler>(SchemesNames.TokenAuthenticationDefaultScheme, o => 
+    { 
+    });
+
+// Athorization
 builder.Services.AddSingleton<IAuthorizationHandler, HasAccessHandler>();
 builder.Services.AddAuthorization(options =>
 {
@@ -86,13 +96,6 @@ builder.Services.AddControllers();
 //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
 //    };
 //});
-//builder.Services.AddAuthorization(config =>
-//{
-//    config.AddPolicy("authenticated", config =>
-//    {
-//        config.RequireAuthenticatedUser();
-//    });
-//});
 
 // Add custom services
 typeof(Program).Assembly.ExportedTypes
@@ -111,13 +114,9 @@ app.UseHttpsRedirection();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseMiddleware<JwtMiddleware>();
-
-app.UseAuthentication();
-
 app.UseMiddleware<GlobalErrorHandlerMiddleware>();
 
-
+app.UseAuthentication(); //app.UseMiddleware<JwtMiddleware>();
 
 app.UseAuthorization();
 
