@@ -26,9 +26,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 
-// Services
+// Repos
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
+// Services
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddTransient<IValidator<YoliSignInRequest>, YoliSignInRequestValidator>();
+builder.Services.AddTransient<IYoliValidatorFactory, YoliValidatorFactory>();
+
+// Third party services
 builder.Services.AddMailKit(config =>
 {
     var mailKitOptions = builder.Configuration.GetSection("Email").Get<MailKitOptions>();
@@ -36,9 +43,6 @@ builder.Services.AddMailKit(config =>
     // For debug purposes
     // https://github.com/ChangemakerStudios/Papercut-SMTP
 });
-
-builder.Services.AddTransient<IValidator<YoliSignInRequest>, YoliSignInRequestValidator>();
-builder.Services.AddTransient<IYoliValidatorFactory, YoliValidatorFactory>();
 
 // Authentication
 builder.Services
@@ -79,7 +83,6 @@ builder.Services.AddSwaggerGen(c =>
     });
     c.OperationFilter<AddAuthHeaderOperationFilter>();
 });
-
 builder.Services.AddControllers();
 
 
