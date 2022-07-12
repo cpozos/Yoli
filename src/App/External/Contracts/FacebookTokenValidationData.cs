@@ -1,31 +1,30 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
-namespace Yoli.App.External.Contracts
+namespace Yoli.App.External.Contracts;
+
+public class FacebookTokenValidationData
 {
-    public class FacebookTokenValidationData
-    {
-        [JsonProperty("is_valid")]
-        public bool IsValid { get; set; } = false;
+    [JsonPropertyName("is_valid")]
+    public bool IsValid { get; set; } = false;
 
-        [JsonProperty("app_id")]
-        public string AppId { get; set; } = string.Empty;
+    [JsonPropertyName("app_id")]
+    public string AppId { get; set; } = string.Empty;
 
-        [JsonProperty("type")]
-        public string Type { get; set; } = string.Empty;
+    [JsonPropertyName("type")]
+    public string Type { get; set; } = string.Empty;
 
-        [JsonProperty("application")]
-        public string Application { get; set; } = string.Empty;
+    [JsonPropertyName("application")]
+    public string Application { get; set; } = string.Empty;
 
-        [JsonProperty("data_access_expires_at")]
-        public long DataAccessExpiresAt { get; set; }
+    [JsonPropertyName("data_access_expires_at")]
+    public long DataAccessExpiresAt { get; set; }
 
-        [JsonProperty("expires_at")]
-        public long ExpiresAt { get; set; }
+    [JsonPropertyName("expires_at")]
+    public long ExpiresAt { get; set; }
 
-        [JsonProperty("scopes")]
-        public string[] Scopes { get; set; } = Array.Empty<string>();
+    [JsonPropertyName("scopes")]
+    public string[] Scopes { get; set; } = Array.Empty<string>();
 
-        [JsonProperty("user_id")]
-        public string UserId { get; set; } = string.Empty;
-    }
+    [JsonPropertyName("user_id")]
+    public string UserId { get; set; } = string.Empty;
 }
