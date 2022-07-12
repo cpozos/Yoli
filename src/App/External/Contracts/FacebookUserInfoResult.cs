@@ -1,22 +1,21 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
-namespace Yoli.App.External.Contracts
+namespace Yoli.App.External.Contracts;
+
+public class FacebookUserInfoResult
 {
-    public class FacebookUserInfoResult
-    {
-        [JsonProperty("id")]
-        public string Id { get; set; } = string.Empty;
+    [JsonPropertyName("id")]
+    public string Id { get; set; } = string.Empty;
 
-        [JsonProperty("email")]
-        public string Email { get; set; } = string.Empty;
+    [JsonPropertyName("email")]
+    public string Email { get; set; } = string.Empty;
 
-        [JsonProperty("first_name")]
-        public string FirstName { get; set; } = string.Empty;
+    [JsonPropertyName("first_name")]
+    public string FirstName { get; set; } = string.Empty;
 
-        [JsonProperty("last_name")]
-        public string LastName { get; set; } = string.Empty;
+    [JsonPropertyName("last_name")]
+    public string LastName { get; set; } = string.Empty;
 
-        [JsonProperty("data")]
-        public FacebookPictureData Data { get; set; } = new();
-    }
+    [JsonPropertyName("data")]
+    public FacebookPictureData Data { get; set; } = new();
 }
