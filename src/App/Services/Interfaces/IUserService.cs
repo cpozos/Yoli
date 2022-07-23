@@ -12,6 +12,7 @@ namespace Yoli.App.Services
 
         // TODO: Replace adding Func<IUser,bool>
         Task<Result<IUser>> GetUserAsync();
+        Task<Result<IUser>> GetUserAsync(int id);
         Task<Claim[]> GetClaims(int userId);
     }
 }

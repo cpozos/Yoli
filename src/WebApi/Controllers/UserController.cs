@@ -30,8 +30,8 @@ namespace Yoli.WebApi.Controllers
         [HttpGet("users2/{id}")]
         public async Task<IActionResult> GetUser2(int id)
         {
-            var currentUser = this.GetCurrentUser();
-            var user = _userService.GetUserAsync();
+            //var currentUser = this.GetCurrentUser();
+            var user = await _userService.GetUserAsync(id);
             return Ok(user);
         }
 

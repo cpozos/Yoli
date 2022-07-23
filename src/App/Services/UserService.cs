@@ -21,6 +21,13 @@ namespace Yoli.App.Services
             var result = new Result<IUser>(user);
             return result;
         }
+        public async Task<Result<IUser>> GetUserAsync(int id)
+        {
+            var user = await _userRepository.GetUser(id);
+            var result = new Result<IUser>(user);
+            return result;
+        }
+
         public Task<Claim[]> GetClaims(int userId)
         {
             return Task.FromResult(new Claim[1] { new Claim(ClaimTypes.Name, "") });

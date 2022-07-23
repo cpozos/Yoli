@@ -170,7 +170,6 @@ while(true)
 
 
 // Configure the HTTP request pipeline.
-
 app.UseHttpsRedirection();
 
 app.UseSwagger();

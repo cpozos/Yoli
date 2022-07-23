@@ -8,10 +8,10 @@ namespace Yoli.WebApi.Installers
     {
         public void InstallServices(IConfiguration configuration, IServiceCollection services)
         {
-            services.AddSingleton<IUserRepository, UserRepository>();
-            services.AddSingleton<IYoliIdentityService, YoliIdentityService>();
-            services.AddSingleton<IYoliAuthService, YoliAuthService>();
-            services.AddSingleton<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IYoliIdentityService, YoliIdentityService>();
+            services.AddScoped<IYoliAuthService, YoliAuthService>();
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }
