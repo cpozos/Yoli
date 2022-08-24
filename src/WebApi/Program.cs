@@ -1,26 +1,28 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.OpenApi.Models;
-using Shared.Middlewares;
-using WebApi.Settings;
-using WebApi.Swagger;
-using Yoli.App.Repositories;
-using Yoli.App.Services;
-using Yoli.Infraestructure;
-using Yoli.Infraestructure.Services;
-using Yoli.Shared.Extensions;
-using Yoli.WebApi.Installers;
 
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
 using FluentValidation;
-using Yoli.WebApi.Requests;
-using Yoli.WebApi.Validations;
-using Microsoft.AspNetCore.Authorization;
-using Yoli.WebApi.Authentication;
+
 using Yoli.App.Authorization;
-using Infraestructure.Persistance;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.EntityFrameworkCore;
+using Yoli.App.Repositories;
+using Yoli.App.Services;
+using Yoli.Infraestructure;
+using Yoli.Infraestructure.Persistance;
+using Yoli.Infraestructure.Services;
+using Yoli.Shared.Extensions;
+using Yoli.Shared.Middlewares;
+using Yoli.WebApi.Authentication;
+using Yoli.WebApi.Installers;
+using Yoli.WebApi.Requests;
+using Yoli.WebApi.Settings;
+using Yoli.WebApi.Swagger;
+using Yoli.WebApi.Validations;
+
 
 {
     IEnumerable<string> l = new List<string>()

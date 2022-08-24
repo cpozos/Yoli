@@ -1,15 +1,14 @@
-﻿namespace Shared.Authorization.Rules
-{
-    public interface IRule
-    {
-        bool ValidateRule();
-    }
+﻿namespace Yoli.Shared.Authorization.Rules;
 
-    public class Rule : IRule
+public interface IRule
+{
+    bool ValidateRule();
+}
+
+public class Rule : IRule
+{
+    public bool ValidateRule()
     {
-        public bool ValidateRule()
-        {
-            throw new NotImplementedException();
-        }
+        throw new NotImplementedException();
     }
 }

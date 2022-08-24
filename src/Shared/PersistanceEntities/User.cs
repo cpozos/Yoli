@@ -1,4 +1,4 @@
-﻿namespace Shared.Persistance.Entities;
+﻿namespace Yoli.Shared.Persistance.Entities;
 
 public class User
 {

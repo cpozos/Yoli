@@ -2,7 +2,7 @@
 using System.Net;
 using System.Text.Json;
 
-namespace Shared.Middlewares
+namespace Yoli.Shared.Middlewares
 {
     public class GlobalErrorHandlerMiddleware
     {
