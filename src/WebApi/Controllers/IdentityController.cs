@@ -1,112 +1,111 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Yoli.App.Repositories;
-using Yoli.Domain.Entities;
 using Yoli.App.Services;
+using Yoli.Domain.Entities;
 using Yoli.WebApi.Responses;
 using Yoli.WebApi.Requests;
 using Yoli.WebApi.Routes;
-using System.ComponentModel.DataAnnotations;
 using Yoli.WebApi.Validations;
-using Microsoft.AspNetCore.Authorization;
 
-namespace Yoli.WebApi.Controllers
+namespace Yoli.WebApi.Controllers;
+
+[Route($"{ApiRoutes.Root}/{ApiVersion.V1}")]
+[ApiController]
+public class IdentityController : ControllerBase
 {
-    [Route($"{ApiRoutes.Root}/{ApiVersion.V1}")]
-    [ApiController]
-    public class IdentityController : ControllerBase
+    private IUserRepository _userRepository;
+    private readonly IYoliIdentityService _yoliIdentityService;
+    private readonly IYoliAuthService _yoliAuthService;
+    private readonly IYoliValidatorFactory _validatorFactory;
+    private readonly ITokenService _tokenService;
+
+    public IdentityController(
+        IUserRepository userRepository,
+        IYoliIdentityService yoliIdentityService,
+        IYoliAuthService yoliAuthService,
+        IYoliValidatorFactory validatorFactory,
+        ITokenService tokenService)
     {
-        private IUserRepository _userRepository;
-        private readonly IYoliIdentityService _yoliIdentityService;
-        private readonly IYoliAuthService _yoliAuthService;
-        private readonly IYoliValidatorFactory _validatorFactory;
-        private readonly ITokenService _tokenService;
+        _userRepository = userRepository;
+        _yoliIdentityService = yoliIdentityService;
+        _yoliAuthService = yoliAuthService;
+        _validatorFactory = validatorFactory;
+        _tokenService = tokenService;
+    }
 
-        public IdentityController(
-            IUserRepository userRepository,
-            IYoliIdentityService yoliIdentityService,
-            IYoliAuthService yoliAuthService,
-            IYoliValidatorFactory validatorFactory,
-            ITokenService tokenService)
+    [HttpPost(ApiRoutes.IdentityRoutes.SigninFacebook)]
+    public async Task<AuthenticationResponse> SignInFacebbok([FromBody] FacebookSignInRequest request)
+    {
+        var result = await _yoliIdentityService.SigninUsingFacebookTask(request.AccessToken);
+        if (!result.Succeeded)
         {
-            _userRepository = userRepository;
-            _yoliIdentityService = yoliIdentityService;
-            _yoliAuthService = yoliAuthService;
-            _validatorFactory = validatorFactory;
-            _tokenService = tokenService;
+            return new AuthenticationResponse(result.Errors);
         }
 
-        [HttpPost(ApiRoutes.IdentityRoutes.SigninFacebook)]
-        public async Task<AuthenticationResponse> SignInFacebbok([FromBody] FacebookSignInRequest request)
+        var authResult = await _yoliAuthService.GenerateAuthenticationResultForUserAsync(result.User);
+        return new AuthenticationResponse { Token = authResult.Token };
+    }
+
+    [HttpGet("face")]
+    public async Task<IActionResult> ClientFacebookTest([FromQuery]string code)
+    {
+        var b = GeneratedIdentityApiRoutes.V1;
+        var a = code?.ToString();
+
+        return Ok(a);
+    }
+
+    [HttpPost("face")]
+    public async Task<IActionResult> TokenFace([FromBody]object data)
+    {
+        return Ok(data);
+    }
+
+    
+
+    [HttpPost(ApiRoutes.IdentityRoutes.SigninYoli)]
+    public async Task<IActionResult> SignIn([FromBody] YoliSignInRequest request)
+    {
+        if (request is null)
+            return BadRequest();
+
+        if (string.IsNullOrWhiteSpace(request.SignInId) || string.IsNullOrWhiteSpace(request.Password))
+            return BadRequest();
+
+        IUser user;
+        if (request.SignInId.Contains("@"))
         {
-            var result = await _yoliIdentityService.SigninUsingFacebookTask(request.AccessToken);
-            if (!result.Succeeded)
+            // Get user by email
+            if (!new EmailAddressAttribute().IsValid(request.SignInId))
             {
-                return new AuthenticationResponse(result.Errors);
-            }
-
-            var authResult = await _yoliAuthService.GenerateAuthenticationResultForUserAsync(result.User);
-            return new AuthenticationResponse { Token = authResult.Token };
-        }
-
-        [HttpGet("face")]
-        public async Task<IActionResult> ClientFacebookTest([FromQuery]string code)
-        {
-            var b = GeneratedIdentityApiRoutes.V1;
-            var a = code?.ToString();
-
-            return Ok(a);
-        }
-
-        [HttpPost("face")]
-        public async Task<IActionResult> TokenFace([FromBody]object data)
-        {
-            return Ok(data);
-        }
-
-        
-
-        [HttpPost(ApiRoutes.IdentityRoutes.SigninYoli)]
-        public async Task<IActionResult> SignIn([FromBody] YoliSignInRequest request)
-        {
-            if (request is null)
                 return BadRequest();
-
-            if (string.IsNullOrWhiteSpace(request.SignInId) || string.IsNullOrWhiteSpace(request.Password))
-                return BadRequest();
-
-            IUser user;
-            if (request.SignInId.Contains("@"))
-            {
-                // Get user by email
-                if (!new EmailAddressAttribute().IsValid(request.SignInId))
-                {
-                    return BadRequest();
-                }
-                user = await _userRepository.GetUserAsync(user => user.Email.Email == request.SignInId);
             }
-            else
-            {
-                // Get user bu user name
-                user = await _userRepository.GetUserAsync(user => user.Name == request.SignInId);
-            }
-
-            return user is null ? BadRequest() : Ok(new SigninResponse(user, _tokenService.GenerateToken(user)));
+            user = await _userRepository.GetUserAsync(user => user.Email.Email == request.SignInId);
         }
-
-        [AllowAnonymous]
-        [HttpPost("fakeSignIn")]
-        public async Task<IActionResult> FakeSignIn([FromBody] YoliSignInRequest request)
+        else
         {
             // Get user bu user name
-            var user = await _userRepository.GetUserAsync(user => user.Name == "1");
-            return user is null ? BadRequest() : Ok(new SigninResponse(user, _tokenService.GenerateToken(user)));
+            user = await _userRepository.GetUserAsync(user => user.Name == request.SignInId);
         }
 
-        private async Task<bool> Validate<T>(T request)
-        {
-            var validator = _validatorFactory.GetValidator<T>();
-            var result = await validator.ValidateAsync(request);
-            return !result.IsValid;
-        }
+        return user is null ? BadRequest() : Ok(new SigninResponse(user, _tokenService.GenerateToken(user)));
+    }
+
+    [AllowAnonymous]
+    [HttpPost("fakeSignIn")]
+    public async Task<IActionResult> FakeSignIn([FromBody] YoliSignInRequest request)
+    {
+        // Get user bu user name
+        var user = await _userRepository.GetUserAsync(user => user.Name == "1");
+        return user is null ? BadRequest() : Ok(new SigninResponse(user, _tokenService.GenerateToken(user)));
+    }
+
+    private async Task<bool> Validate<T>(T request)
+    {
+        var validator = _validatorFactory.GetValidator<T>();
+        var result = await validator.ValidateAsync(request);
+        return !result.IsValid;
     }
 }
