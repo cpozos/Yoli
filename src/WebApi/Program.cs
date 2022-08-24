@@ -10,7 +10,6 @@ using Yoli.Infraestructure.Services;
 using Yoli.Shared.Extensions;
 using Yoli.WebApi.Installers;
 
-
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
 using FluentValidation;
@@ -19,6 +18,42 @@ using Yoli.WebApi.Validations;
 using Microsoft.AspNetCore.Authorization;
 using Yoli.WebApi.Authentication;
 using Yoli.App.Authorization;
+using Infraestructure.Persistance;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.EntityFrameworkCore;
+{
+    IEnumerable<string> l = new List<string>()
+    {
+        "B",
+        "C",
+        "A",
+        "A",
+    };
+
+    var repeated = l.GroupBy(i =>
+    {
+        return i;
+    }).Any(g =>
+    {
+        bool more = g.Count() > 1;
+        return more;
+    });
+
+    var test = new Test();
+    test.List.Add(new Test2 { Name = "", Test3 = new Test3 { Name = "3" } });
+    var x = GetXElement(test);
+    var xStr = x.ToString();
+    System.Xml.Linq.XElement GetXElement<T>(T obj)
+    {
+        using var ms = new MemoryStream();
+        using TextWriter streamWriter = new StreamWriter(ms);
+        var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(T));
+        xmlSerializer.Serialize(streamWriter, obj);
+        var xElement = System.Xml.Linq.XElement.Parse(System.Text.Encoding.ASCII.GetString(ms.ToArray()));
+        return xElement;
+    }
+    
+}
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +69,15 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddTransient<IValidator<YoliSignInRequest>, YoliSignInRequestValidator>();
 builder.Services.AddTransient<IYoliValidatorFactory, YoliValidatorFactory>();
+
+// Dbcontex
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<YoliDbContext>(opt =>
+    {
+        opt.UseInMemoryDatabase(Guid.NewGuid().ToString());
+    });
+}
 
 // Third party services
 builder.Services.AddMailKit(config =>
@@ -62,6 +106,9 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy(YoliPolicy.MustHaveAccessPolicy, policy => policy.Requirements.Add(new HasAccessRequirement()));
 });
 
+// Providers
+builder.Services.AddCustomProviders();
+
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -84,6 +131,7 @@ builder.Services.AddSwaggerGen(c =>
     c.OperationFilter<AddAuthHeaderOperationFilter>();
 });
 builder.Services.AddControllers();
+builder.Services.AddMemoryCache();
 
 
 //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
@@ -108,6 +156,17 @@ typeof(Program).Assembly.ExportedTypes
     .ForEach(x => x.InstallServices(builder.Configuration, builder.Services));
 
 var app = builder.Build();
+
+while(true)
+{
+    string resTask = await Task.FromResult<string>(null);
+    var cache = app.Services.GetRequiredService<IMemoryCache>();
+    var entryRes = cache.GetOrCreate("1", entry =>
+    {
+        entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
+        return Guid.NewGuid().ToString();
+    });
+}
 
 
 // Configure the HTTP request pipeline.

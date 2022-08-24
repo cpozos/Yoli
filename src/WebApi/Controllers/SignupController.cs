@@ -2,6 +2,7 @@
 using Yoli.App.Services;
 using Yoli.WebApi.Requests;
 using Yoli.WebApi.Routes;
+using Yoli.WebApi.Filters;
 using Domain.ValueObjects;
 using Yoli.App.Dtos;
 using NETCore.MailKit.Core;
@@ -27,6 +28,7 @@ namespace Yoli.WebApi.Controllers
 
 
         [HttpPost(ApiRoutes.IdentityRoutes.SignupYoli)]
+        [RequestLogger]
         public async Task<IActionResult> SignUp([FromBody] YoliSignUpRequest request)
         {
             // Save data
