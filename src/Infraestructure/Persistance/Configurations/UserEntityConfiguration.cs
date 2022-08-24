@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infraestructure.Persistance;
+namespace Yoli.Infraestructure.Persistance;
 
 internal class UserEntityConfiguration : IEntityTypeConfiguration<User>
 {

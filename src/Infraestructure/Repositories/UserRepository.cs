@@ -1,7 +1,7 @@
-﻿using Infraestructure.Persistance;
-using Yoli.App.Repositories;
+﻿using Yoli.App.Repositories;
 using Yoli.Domain.Entities;
 using Yoli.Domain.ValueObjects;
+using Yoli.Infraestructure.Persistance;
 
 namespace Yoli.Infraestructure;
 
