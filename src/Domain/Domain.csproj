@@ -7,10 +7,4 @@
     <Configurations>Debug;Release;DGenerators</Configurations>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-    <Folder Include="Enums\" />
-    <Folder Include="Events\" />
-  </ItemGroup>
-
 </Project>

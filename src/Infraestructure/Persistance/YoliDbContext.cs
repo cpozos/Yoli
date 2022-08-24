@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Domain.Persistance.Entities;
 
-namespace Infraestructure.Persistance;
+namespace Yoli.Infraestructure.Persistance;
 
 public class YoliDbContext : DbContext
 {
