@@ -85,8 +85,6 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Services
 builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddTransient<IValidator<YoliSignInRequest>, YoliSignInRequestValidator>();
-builder.Services.AddTransient<IYoliValidatorFactory, YoliValidatorFactory>();
 
 // Dbcontex
 if (builder.Environment.IsDevelopment())

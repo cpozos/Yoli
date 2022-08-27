@@ -1,7 +1,6 @@
-﻿namespace WebApi.Contracts.Requests
+﻿namespace Yoli.WebApi.Requests;
+
+public class PasswordChangeRequest
 {
-    public class PasswordChangeRequest
-    {
-        public string Password { get; set; }
-    }
+    public string Password { get; set; }
 }
