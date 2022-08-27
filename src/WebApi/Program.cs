@@ -26,13 +26,27 @@ using Yoli.WebApi.Swagger;
 using Yoli.WebApi.Validations;
 
 {
+    byte[] Zip(params string[] values)
+    {
+        var list = new List<string>();
+        foreach (var item in values)
+        {
+            list.Add(item);
+        }
+        return new byte[1];
+    }
+
+
     IEnumerable<string> l = new List<string>()
     {
         "B",
         "C",
         "A",
         "A",
+        null
     };
+
+    var re = Zip(l.ToArray());
 
     var repeated = l.GroupBy(i =>
     {

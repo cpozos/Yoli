@@ -1,15 +1,14 @@
 ﻿using FluentValidation;
 using Yoli.WebApi.Requests;
 
-namespace Yoli.WebApi.Validations
+namespace Yoli.WebApi.Validations;
+
+public class YoliSignInRequestValidator : AbstractValidator<YoliSignInRequest>
 {
-    public class YoliSignInRequestValidator : AbstractValidator<YoliSignInRequest>
+    public YoliSignInRequestValidator()
     {
-        public YoliSignInRequestValidator()
-        {
-            RuleFor(r => r.Password)
-                .NotNull().NotEmpty()
-                .WithMessage("Password required");
-        }
+        RuleFor(r => r.Password)
+            .NotNull().NotEmpty()
+            .WithMessage("Password required");
     }
 }
