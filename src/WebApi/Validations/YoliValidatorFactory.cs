@@ -7,9 +7,12 @@ public class YoliValidatorFactory : IYoliValidatorFactory
 {
     private readonly Dictionary<Type, IValidator> validators = new();
 
-    public YoliValidatorFactory(IValidator<YoliSignInRequest> validator)
+    public YoliValidatorFactory(
+        IValidator<YoliSignInRequest> validator,
+        IValidator<PasswordChangeRequest> passwordValidator)
     {
         validators.Add(typeof(YoliSignInRequest), validator);
+        validators.Add(typeof(YoliSignInRequest), passwordValidator);
     }
 
     public IValidator<T> GetValidator<T>()
