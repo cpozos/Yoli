@@ -1,6 +1,7 @@
-﻿using WebApi.Installers.Interfaces;
-using WebApi.Providers;
-using WebApi.Resolvers;
+﻿using Yoli.WebApi.Installers.Interfaces;
+using Yoli.WebApi.Providers;
+using Yoli.WebApi.Resolvers;
+using Yoli.WebApi.Settings;
 
 namespace Yoli.WebApi.Installers;
 

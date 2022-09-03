@@ -1,20 +1,18 @@
 ﻿using Yoli.App.Options;
 using Yoli.App.Services;
 using Infraestructure.Services;
-using WebApi.Installers.Interfaces;
+using Yoli.WebApi.Installers.Interfaces;
 
-namespace WebApi.Installations
+namespace WebApi.Installations;
+public class FacebookAuthInstaller : IInstaller
 {
-    public class FacebookAuthInstaller : IInstaller
+    public void InstallServices(IConfiguration configuration, IServiceCollection services)
     {
-        public void InstallServices(IConfiguration configuration, IServiceCollection services)
-        {
-            var facebookAuthSettings = new FacebookAuthSettings();
-            configuration.Bind(nameof(FacebookAuthSettings), facebookAuthSettings);
-            services.AddSingleton(facebookAuthSettings);
+        var facebookAuthSettings = new FacebookAuthSettings();
+        configuration.Bind(nameof(FacebookAuthSettings), facebookAuthSettings);
+        services.AddSingleton(facebookAuthSettings);
 
-            services.AddHttpClient();
-            services.AddSingleton<IFacebookAuthService, FacebookAuthService>();
-        }
+        services.AddHttpClient();
+        services.AddSingleton<IFacebookAuthService, FacebookAuthService>();
     }
 }

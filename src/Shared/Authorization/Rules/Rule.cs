@@ -2,13 +2,7 @@
 
 public interface IRule
 {
-    bool ValidateRule();
-}
-
-public class Rule : IRule
-{
-    public bool ValidateRule()
-    {
-        throw new NotImplementedException();
-    }
+    IRule NextRule { get; }
+    IRule SetNext(IRule rule);
+    Task<bool> ValidateRule(RuleContext context);
 }

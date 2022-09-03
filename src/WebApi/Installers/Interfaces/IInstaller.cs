@@ -1,7 +1,5 @@
-﻿namespace WebApi.Installers.Interfaces
+﻿namespace Yoli.WebApi.Installers.Interfaces;
+public interface IInstaller
 {
-    public interface IInstaller
-    {
-        public void InstallServices(IConfiguration configuration, IServiceCollection services);
-    }
+    public void InstallServices(IConfiguration configuration, IServiceCollection services);
 }

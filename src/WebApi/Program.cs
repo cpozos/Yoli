@@ -6,7 +6,6 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.OpenApi.Models;
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
-using WebApi.Installers.Interfaces;
 using Yoli.App.Authorization;
 using Yoli.App.Repositories;
 using Yoli.App.Services;
@@ -17,6 +16,7 @@ using Yoli.Shared.Authentication;
 using Yoli.Shared.Extensions;
 using Yoli.Shared.Middlewares;
 using Yoli.WebApi.Authentication;
+using Yoli.WebApi.Installers.Interfaces;
 using Yoli.WebApi.Settings;
 using Yoli.WebApi.Swagger;
 
@@ -116,9 +116,6 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy(YoliPolicy.MustHaveAccessPolicy, policy => policy.Requirements.Add(new HasAccessRequirement()));
 });
-
-// Providers
-builder.Services.AddCustomProviders();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
