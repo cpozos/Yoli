@@ -8,7 +8,6 @@ using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
 using FluentValidation;
 
-
 using Yoli.App.Authentication;
 using Yoli.App.Authorization;
 using Yoli.App.Repositories;

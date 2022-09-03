@@ -44,7 +44,10 @@ public class YoliAuthenticationHandler : AuthenticationHandler<YoliAuthenticatio
                 var result = await _userService.GetUserAsync();
                 if (result.Succeeded)
                 {
+                    // Attach user to context
                     Context.Items[HttpContextItems.YoliUser] = result.Data;
+                    
+                    // Generates the claims
                     var claims = new[] { new Claim("token", token) };
                     var identity = new ClaimsIdentity(claims, nameof(YoliAuthenticationHandler));
                     var ticket = new AuthenticationTicket(new ClaimsPrincipal(identity), Scheme.Name);
@@ -53,6 +56,8 @@ public class YoliAuthenticationHandler : AuthenticationHandler<YoliAuthenticatio
             }
         }
 
+        // do nothing if jwt validation fails
+        // user is not attached to context so request won't have access to secure routes
         return AuthenticateResult.NoResult();
     }
 
@@ -71,37 +76,5 @@ public class YoliAuthenticationHandler : AuthenticationHandler<YoliAuthenticatio
         });
 
         return result;
-    }
-
-    private async Task AttachUserToContext(HttpContext context, IUserService userService, string token)
-    {
-        try
-        {
-            //var tokenHandler = new JwtSecurityTokenHandler();
-            //var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            //tokenHandler.ValidateToken(token, new TokenValidationParameters
-            //{
-            //    ValidateIssuerSigningKey = true,
-            //    IssuerSigningKey = new SymmetricSecurityKey(key),
-            //    ValidateIssuer = false,
-            //    ValidateAudience = false,
-            //    // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
-            //    ClockSkew = TimeSpan.Zero
-            //}, out SecurityToken validatedToken);
-
-            //var jwtToken = (JwtSecurityToken)validatedToken;
-
-            var userIdClaim = "1"; // jwtToken.Claims.First(x => x.Type == "id").Value
-
-            var userId = int.Parse(userIdClaim);
-
-            // attach user to context on successful jwt validation
-            context.Items["User"] = await userService.GetUserAsync();
-        }
-        catch
-        {
-            // do nothing if jwt validation fails
-            // user is not attached to context so request won't have access to secure routes
-        }
     }
 }
