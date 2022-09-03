@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Configurations>Debug;Release;DGenerators</Configurations>
+	<RootNamespace>Yoli.Domain</RootNamespace>
   </PropertyGroup>
 
 </Project>

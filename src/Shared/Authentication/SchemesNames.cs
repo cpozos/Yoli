@@ -1,4 +1,4 @@
-﻿namespace Yoli.App.Authentication;
+﻿namespace Yoli.Shared.Authentication;
 
 public class SchemesNames
 {

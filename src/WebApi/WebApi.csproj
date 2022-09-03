@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <Configurations>Debug;Release;DGenerators</Configurations>
+	<RootNamespace>Yoli.WebApi</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,9 +1,8 @@
 ﻿using FluentValidation;
 
-namespace Yoli.WebApi.Validations
+namespace Yoli.WebApi.Validations;
+
+public interface IYoliValidatorFactory
 {
-    public interface IYoliValidatorFactory
-    {
-        public IValidator<T> GetValidator<T>();
-    }
+    public IValidator<T> GetValidator<T>();
 }

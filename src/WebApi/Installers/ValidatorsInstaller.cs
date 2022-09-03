@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using WebApi.Installers.Interfaces;
 using Yoli.WebApi.Requests;
 using Yoli.WebApi.Validations;
 

@@ -1,16 +1,23 @@
-﻿using WebApi.Providers;
+﻿using WebApi.Installers.Interfaces;
+using WebApi.Providers;
 using WebApi.Resolvers;
 
 namespace Yoli.WebApi.Installers;
 
-public static class ServiceCollectionExtensions
+public class ProvidersResolversInstaller : IInstaller
 {
-    public static void AddCustomProviders(this IServiceCollection services)
+    public void InstallServices(IConfiguration configuration, IServiceCollection services)
+    {
+        AddCustomProviders(services);
+        AddResolvers(services);
+    }
+
+    private void AddCustomProviders(IServiceCollection services)
     {
         services.AddScoped<CustomSettingsProvider>(provider => id => GetCustomSettings(id, provider));
     }
 
-    public static void AddResolvers(this IServiceCollection services)
+    private void AddResolvers(IServiceCollection services)
     {
         services.AddScoped<CustomProcessor1>();
         services.AddScoped<CustomProcessor2>();
@@ -32,7 +39,7 @@ public static class ServiceCollectionExtensions
         });
     }
 
-    public static CustomSettings GetCustomSettings(int id, IServiceProvider provider)
+    public CustomSettings GetCustomSettings(int id, IServiceProvider provider)
     {
         return new CustomSettings(id.ToString());
     }

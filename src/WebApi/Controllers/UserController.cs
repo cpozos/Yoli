@@ -3,8 +3,8 @@ using Yoli.App.Authorization;
 using Yoli.App.Services;
 using Yoli.WebApi.Routes;
 using Yoli.WebApi.Authorization;
+using Yoli.WebApi.Extensions;
 using Microsoft.AspNetCore.Authorization;
-using WebApi.Extensions;
 
 namespace Yoli.WebApi.Controllers;
 

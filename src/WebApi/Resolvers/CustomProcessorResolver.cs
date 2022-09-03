@@ -1,4 +1,4 @@
-﻿namespace WebApi.Resolvers;
+﻿namespace Yoli.WebApi.Resolvers;
 
 public interface ICustomProcessor
 {

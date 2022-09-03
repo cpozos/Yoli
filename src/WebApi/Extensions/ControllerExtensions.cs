@@ -3,7 +3,7 @@ using Yoli.Shared.Constants;
 using Yoli.Domain.Entities;
 using Yoli.WebApi.Authorization;
 
-namespace WebApi.Extensions;
+namespace Yoli.WebApi.Extensions;
 
 public static class ControllerExtensions
 {

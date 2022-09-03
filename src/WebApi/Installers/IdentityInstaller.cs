@@ -1,4 +1,5 @@
-﻿using Yoli.App.Repositories;
+﻿using WebApi.Installers.Interfaces;
+using Yoli.App.Repositories;
 using Yoli.App.Services;
 using Yoli.Infraestructure;
 

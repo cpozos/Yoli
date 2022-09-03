@@ -1,28 +1,24 @@
-using Microsoft.AspNetCore.Authorization;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.OpenApi.Models;
-
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
-using FluentValidation;
-
-using Yoli.App.Authentication;
+using WebApi.Installers.Interfaces;
 using Yoli.App.Authorization;
 using Yoli.App.Repositories;
 using Yoli.App.Services;
 using Yoli.Infraestructure;
 using Yoli.Infraestructure.Persistance;
 using Yoli.Infraestructure.Services;
+using Yoli.Shared.Authentication;
 using Yoli.Shared.Extensions;
 using Yoli.Shared.Middlewares;
 using Yoli.WebApi.Authentication;
-using Yoli.WebApi.Installers;
-using Yoli.WebApi.Requests;
 using Yoli.WebApi.Settings;
 using Yoli.WebApi.Swagger;
-using Yoli.WebApi.Validations;
 
 {
     byte[] Zip(params string[] values)
