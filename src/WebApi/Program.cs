@@ -110,13 +110,6 @@ builder.Services
     { 
     });
 
-// Athorization
-builder.Services.AddSingleton<IAuthorizationHandler, HasAccessHandler>();
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy(YoliPolicy.MustHaveAccessPolicy, policy => policy.Requirements.Add(new HasAccessRequirement()));
-});
-
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

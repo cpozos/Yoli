@@ -5,11 +5,6 @@ using Yoli.WebApi.Contracts.RouteValues;
 
 namespace Yoli.WebApi.Authorization;
 
-public class UserAccessRequirement : IAuthorizationRequirement
-{
-    
-}
-
 public class UserAccessHandler : EntityAccessHandler<UserAccessRequirement>
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
@@ -28,4 +23,9 @@ public class UserAccessHandler : EntityAccessHandler<UserAccessRequirement>
 
         return result;
     }
+}
+
+public class UserAccessRequirement : IAuthorizationRequirement
+{
+
 }
