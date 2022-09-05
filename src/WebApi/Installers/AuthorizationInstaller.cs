@@ -14,7 +14,7 @@ public class AuthorizationInstaller : IInstaller
         services.AddAuthorization(options =>
         {
             options.AddPolicy(YoliPolicy.MustHaveAccessPolicy, policy => policy.Requirements.Add(new HasAccessRequirement()));
-            options.AddPolicy("UserAccessPolicy", policy => policy.Requirements.Add(new HasAccessRequirement()));
+            options.AddPolicy(YoliPolicy.UserAccessPolicy, policy => policy.Requirements.Add(new HasAccessRequirement()));
         });
     }
 }
