@@ -1,0 +1,35 @@
+version: "3.8"
+
+volumes:
+ db_data:
+
+services:
+  sqldb:
+    image: mcr:microsoft.com/azure-sql-edge:latest
+    environment:
+      SA_PASSWORD: ${DBPassword}
+      ACCEPT_EULA: "Y"
+    ports:
+      - 1436:1433
+    volumes:
+      - dbdata:/var/opt/mssql
+    command: /opt/mssql/bin/sqlserver
+    stin_open: true
+    networks:
+      - db-net
+
+  sqlcmd:
+    image: mcr:microsoft.com/mssql-tools:latest
+    environment:
+      SA_PASSWORD: ${DBPassword}
+      DOCKER_SERVICE_DATABASE: "sqldb"
+    volumes:
+      - ./scripts:/opt/mssql_scripts
+    command: /opt/mssql_scripts/init.sh
+    stdin_open: true
+    networks:
+      - db-net
+
+networks:
+  db_net:
+    name: db_net

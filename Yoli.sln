@@ -19,12 +19,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generators", "src\Generator
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{06DBAADF-6203-4F28-916C-A5E3E6468217}"
 	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
 		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "src\Shared\Shared.csproj", "{732A4738-F942-4154-9DE0-A609B6A2CF30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yoli.WebApi.Tests", "tests\Yoli.WebApi.Tests\Yoli.WebApi.Tests.csproj", "{8BA77CAE-C704-47AE-AEAD-B2325385B94D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yoli.WebApi.Tests", "tests\Yoli.WebApi.Tests\Yoli.WebApi.Tests.csproj", "{8BA77CAE-C704-47AE-AEAD-B2325385B94D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmarks", "Benchmarks\Benchmarks.csproj", "{6295A094-382A-4E6B-ACCE-AF1E1B895D6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StyleCop", "StyleCop\StyleCop.csproj", "{8F3337CB-2EDF-479F-B119-0224CDF44E4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +80,18 @@ Global
 		{8BA77CAE-C704-47AE-AEAD-B2325385B94D}.DGenerators|Any CPU.Build.0 = Debug|Any CPU
 		{8BA77CAE-C704-47AE-AEAD-B2325385B94D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BA77CAE-C704-47AE-AEAD-B2325385B94D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6295A094-382A-4E6B-ACCE-AF1E1B895D6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6295A094-382A-4E6B-ACCE-AF1E1B895D6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6295A094-382A-4E6B-ACCE-AF1E1B895D6E}.DGenerators|Any CPU.ActiveCfg = Debug|Any CPU
+		{6295A094-382A-4E6B-ACCE-AF1E1B895D6E}.DGenerators|Any CPU.Build.0 = Debug|Any CPU
+		{6295A094-382A-4E6B-ACCE-AF1E1B895D6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6295A094-382A-4E6B-ACCE-AF1E1B895D6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F3337CB-2EDF-479F-B119-0224CDF44E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3337CB-2EDF-479F-B119-0224CDF44E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3337CB-2EDF-479F-B119-0224CDF44E4D}.DGenerators|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3337CB-2EDF-479F-B119-0224CDF44E4D}.DGenerators|Any CPU.Build.0 = Debug|Any CPU
+		{8F3337CB-2EDF-479F-B119-0224CDF44E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3337CB-2EDF-479F-B119-0224CDF44E4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +104,8 @@ Global
 		{5C15A034-39D3-4C6C-A0EF-F7C171AEDA40} = {4741A196-5386-4577-B77E-9808AD0B6F18}
 		{732A4738-F942-4154-9DE0-A609B6A2CF30} = {4741A196-5386-4577-B77E-9808AD0B6F18}
 		{8BA77CAE-C704-47AE-AEAD-B2325385B94D} = {9ADEE0AB-B265-4A77-BFD9-AAD37FC262FA}
+		{6295A094-382A-4E6B-ACCE-AF1E1B895D6E} = {9ADEE0AB-B265-4A77-BFD9-AAD37FC262FA}
+		{8F3337CB-2EDF-479F-B119-0224CDF44E4D} = {9ADEE0AB-B265-4A77-BFD9-AAD37FC262FA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {64866C8D-AD9C-47D3-8D12-A66763D938EF}
