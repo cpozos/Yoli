@@ -15,6 +15,8 @@ WORKDIR /app
 EXPOSE 80
 # Copies all from build container inside its /app folder to this container's /app folder
 COPY --from=build /app .
+
+# Command to run the published application (dll)
 ENTRYPOINT ["dotnet", "WebApi.dll"]
 
 # docker build -t yoli .
