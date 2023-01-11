@@ -20,6 +20,7 @@ using Yoli.WebApi.Installers.Interfaces;
 using Yoli.WebApi.Settings;
 using Yoli.WebApi.Swagger;
 
+/*  Tests for zipping and xml
 {
     byte[] Zip(params string[] values)
     {
@@ -67,6 +68,7 @@ using Yoli.WebApi.Swagger;
     }
     
 }
+*/
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -159,23 +161,28 @@ typeof(Program).Assembly.ExportedTypes
 
 var app = builder.Build();
 
-while(true)
+/* TEST CACHE TIME
 {
-    string resTask = await Task.FromResult<string>(null);
-    var cache = app.Services.GetRequiredService<IMemoryCache>();
-    var entryRes = cache.GetOrCreate("1", entry =>
+    while(true)
     {
-        entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
-        return Guid.NewGuid().ToString();
-    });
+        string? resTask = await Task.FromResult<string?>(null);
+        var cache = app.Services.GetRequiredService<IMemoryCache>();
+        var entryRes = cache.GetOrCreate("1", entry =>
+        {
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
+            return Guid.NewGuid().ToString();
+        });
+    }
 }
-
+*/
 
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.UseCors(op => op.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
 app.UseMiddleware<GlobalErrorHandlerMiddleware>();
 
@@ -184,6 +191,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
 
 app.Run();
