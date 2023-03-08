@@ -12,7 +12,7 @@ public class YoliValidatorFactory : IYoliValidatorFactory
         IValidator<PasswordChangeRequest> passwordValidator)
     {
         validators.Add(typeof(YoliSignInRequest), validator);
-        validators.Add(typeof(YoliSignInRequest), passwordValidator);
+        validators.Add(typeof(PasswordChangeRequest), passwordValidator);
     }
 
     public IValidator<T> GetValidator<T>()

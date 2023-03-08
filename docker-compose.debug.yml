@@ -1,15 +1,15 @@
 # Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
 
-version: '3.4'
+version: '3.8'
 
 services:
-  webapi:
-    image: webapi
+  yoli-api:
+    image: yoli
     build:
       context: .
-      dockerfile: src/WebApi/Dockerfile
+      dockerfile: Dockerfile
     ports:
-      - 5029:5029
+      - 7029:80
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     volumes:

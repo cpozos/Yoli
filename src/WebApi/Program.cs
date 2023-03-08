@@ -72,26 +72,24 @@ using Yoli.WebApi.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Settings
-builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
-
-
-// Repos
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-
-// Services
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<ITokenService, TokenService>();
-
 // Dbcontex
-if (builder.Environment.IsDevelopment())
+if (builder.Environment.IsDevelopment() || true)
 {
     builder.Services.AddDbContext<YoliDbContext>(opt =>
     {
         opt.UseInMemoryDatabase(Guid.NewGuid().ToString());
     });
 }
+
+// Settings
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+
+// Repos
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+// Services
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 // Third party services
 builder.Services.AddMailKit(config =>
