@@ -1,15 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Yoli.WebApi.Requests
+namespace Yoli.WebApi.Contracts.Requests;
+
+public record YoliSignUpRequest
 {
-    public record YoliSignUpRequest
-    {
-        [EmailAddress]
-        public string Email { get; init; } = default!;
-        public string FirstName { get; init; } = default!;
-        public string SecondName { get; init; } = default!;
-        public string LastName { get; init; } = default!;
-        public DateTime BirthDay { get; init; } = default!;
-        public string Password { get; init; } = default!;
-    }
+    [EmailAddress]
+    public string Email { get; init; } = default!;
+    public string FirstName { get; init; } = default!;
+    public string SecondName { get; init; } = default!;
+    public string LastName { get; init; } = default!;
+    public DateTime BirthDay { get; init; } = default!;
+    public string Password { get; init; } = default!;
 }

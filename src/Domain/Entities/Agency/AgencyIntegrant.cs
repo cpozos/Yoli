@@ -1,7 +1,6 @@
-﻿using Yoli.Domain.Entities;
-using Yoli.Domain.ValueObjects;
+﻿using Yoli.Domain.ValueObjects;
 
-namespace Domain.Entities.Users;
+namespace Yoli.Domain.Entities;
 
 public class AgencyIntegrant : Person
 {

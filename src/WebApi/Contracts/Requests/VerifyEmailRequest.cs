@@ -1,7 +1,6 @@
-﻿namespace Yoli.WebApi.Requests
+﻿namespace Yoli.WebApi.Contracts.Requests;
+
+public class VerifyEmailRequest
 {
-    public class VerifyEmailRequest
-    {
-        public string token { get; set; }
-    }
+    public string token { get; set; }
 }

@@ -1,4 +1,5 @@
 ﻿namespace Yoli.WebApi.Settings;
+
 public class AppSettings
 {
 }

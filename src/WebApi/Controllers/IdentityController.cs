@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Yoli.App.Repositories;
 using Yoli.App.Services;
 using Yoli.Domain.Entities;
-using Yoli.WebApi.Responses;
-using Yoli.WebApi.Requests;
+using Yoli.WebApi.Contracts.Responses;
+using Yoli.WebApi.Contracts.Requests;
 using Yoli.WebApi.Routes;
 using Yoli.WebApi.Validations;
 

@@ -3,7 +3,8 @@ using Yoli.App.Services;
 using Yoli.Infraestructure.Services;
 using Yoli.WebApi.Installers.Interfaces;
 
-namespace WebApi.Installations;
+namespace Yoli.WebApi.Installations;
+
 public class FacebookAuthInstaller : IInstaller
 {
     public void InstallServices(IConfiguration configuration, IServiceCollection services)

@@ -1,6 +1,5 @@
-﻿namespace Yoli.WebApi.Requests
+﻿namespace Yoli.WebApi.Contracts.Requests;
+
+public record BaseRequest
 {
-    public record BaseRequest
-    {
-    }
 }

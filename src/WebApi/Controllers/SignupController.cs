@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Yoli.App.Services;
-using Yoli.WebApi.Requests;
+using Yoli.WebApi.Contracts.Requests;
 using Yoli.WebApi.Routes;
 using Yoli.WebApi.Filters;
-using Domain.ValueObjects;
+using Yoli.Domain.ValueObjects;
 using Yoli.App.Dtos;
 using NETCore.MailKit.Core;
 

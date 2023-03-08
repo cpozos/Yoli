@@ -1,4 +1,4 @@
-﻿namespace Yoli.WebApi.Requests;
+﻿namespace Yoli.WebApi.Contracts.Requests;
 
 public class PasswordChangeRequest
 {

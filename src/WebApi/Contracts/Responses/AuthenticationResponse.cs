@@ -1,28 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Yoli.WebApi.Responses
+namespace Yoli.WebApi.Contracts.Responses;
+
+public class AuthenticationResponse : IActionResult
 {
-    public class AuthenticationResponse : IActionResult
+    public bool IsValid => !Errors.Any() && !string.IsNullOrEmpty(Token);
+    public IEnumerable<string> Errors { get; }
+    public string Token { get; init; } = string.Empty;
+
+    public AuthenticationResponse(IEnumerable<string> errors = null)
     {
-        public bool IsValid => !Errors.Any() && !string.IsNullOrEmpty(Token);
-        public IEnumerable<string> Errors { get; }
-        public string Token { get; init; } = string.Empty;
+        Errors = errors ?? Enumerable.Empty<string>();
+    }
 
-        public AuthenticationResponse(IEnumerable<string> errors = null)
+    public async Task ExecuteResultAsync(ActionContext context)
+    {
+        var objectResult = new ObjectResult(IsValid ? Errors : Token)
         {
-            Errors = errors ?? Enumerable.Empty<string>();
-        }
+            StatusCode = IsValid
+            ? StatusCodes.Status200OK
+            : StatusCodes.Status401Unauthorized
+        };
 
-        public async Task ExecuteResultAsync(ActionContext context)
-        {
-            var objectResult = new ObjectResult(IsValid ? Errors : Token)
-            {
-                StatusCode = IsValid
-                ? StatusCodes.Status200OK
-                : StatusCodes.Status401Unauthorized
-            };
-
-            await objectResult.ExecuteResultAsync(context);
-        }
+        await objectResult.ExecuteResultAsync(context);
     }
 }

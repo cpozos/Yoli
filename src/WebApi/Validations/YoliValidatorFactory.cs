@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Yoli.WebApi.Requests;
+using Yoli.WebApi.Contracts.Requests;
 
 namespace Yoli.WebApi.Validations;
 

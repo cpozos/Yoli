@@ -4,6 +4,7 @@ using Yoli.App.Services;
 using Yoli.Infraestructure;
 
 namespace Yoli.WebApi.Installers;
+
 public class IdentityInstaller : IInstaller
 {
     public void InstallServices(IConfiguration configuration, IServiceCollection services)

@@ -13,6 +13,7 @@
             public const string VerifyEmail = "signup/verify-email";
         }        
     }
+
     public static class ApiVersion
     {
         public const string V1 = "v3";

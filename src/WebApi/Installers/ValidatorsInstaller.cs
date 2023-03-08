@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Yoli.WebApi.Installers.Interfaces;
-using Yoli.WebApi.Requests;
+using Yoli.WebApi.Contracts.Requests;
 using Yoli.WebApi.Validations;
 
 namespace Yoli.WebApi.Installers;

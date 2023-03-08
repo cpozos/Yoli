@@ -1,4 +1,4 @@
-﻿using Domain.ValueObjects;
+﻿using Yoli.Domain.ValueObjects;
 
 namespace Yoli.App.Dtos;
 

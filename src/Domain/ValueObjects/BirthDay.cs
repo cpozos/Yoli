@@ -1,4 +1,4 @@
-﻿namespace Domain.ValueObjects;
+﻿namespace Yoli.Domain.ValueObjects;
 
 public class BirthDay
 {
