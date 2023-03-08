@@ -1,18 +1,25 @@
 version: "3.8"
 
 volumes:
- db_data:
+ dbdata:
 
 services:
   yoli-api:
+    user: root
     image: yoli
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - 7029:80
+    depends_on:
+      - sqldb
+    networks:
+      - db_net
+
   sqldb:
-    image: mcr:microsoft.com/azure-sql-edge:latest
+    user: root
+    image: mcr.microsoft.com/azure-sql-edge:latest
     environment:
       SA_PASSWORD: ${DBPassword}
       ACCEPT_EULA: "Y"
@@ -20,22 +27,23 @@ services:
       - 1436:1433
     volumes:
       - dbdata:/var/opt/mssql
-    command: /opt/mssql/bin/sqlserver
-    stin_open: true
+    command: /opt/mssql/bin/sqlservr
+    stdin_open: true
     networks:
-      - db-net
+      - db_net
 
   sqlcmd:
-    image: mcr:microsoft.com/mssql-tools:latest
+    user: root
+    image: mcr.microsoft.com/mssql-tools:latest
     environment:
       SA_PASSWORD: ${DBPassword}
-      DOCKER_SERVICE_DATABASE: "sqldb"
+      DB_SERVER_NAME: "sqldb"
     volumes:
       - ./scripts:/opt/mssql_scripts
     command: /opt/mssql_scripts/init.sh
     stdin_open: true
     networks:
-      - db-net
+      - db_net
 
 networks:
   db_net:

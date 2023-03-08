@@ -73,12 +73,23 @@ using Yoli.WebApi.Swagger;
 var builder = WebApplication.CreateBuilder(args);
 
 // Dbcontex
-if (builder.Environment.IsDevelopment() || true)
+if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
+{
+    builder.Services.AddDbContext<YoliDbContext>(opt =>
+    {
+        opt.UseSqlServer("Server=sqldb,1433;Database=yoli;User ID=sa;Password=SuperStrongPassword3;TrustServerCertificate=true");
+    });
+}
+else if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddDbContext<YoliDbContext>(opt =>
     {
         opt.UseInMemoryDatabase(Guid.NewGuid().ToString());
     });
+}
+else
+{
+   throw new NotImplementedException("Database is not specified.");
 }
 
 // Settings
