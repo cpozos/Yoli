@@ -1,9 +1,8 @@
 ﻿using Yoli.App.Entities;
 
-namespace Yoli.App.Services
+namespace Yoli.App.Services;
+
+public interface IYoliIdentityService
 {
-    public interface IYoliIdentityService
-    {
-        public Task<YoliIdentityResult> SigninUsingFacebookTask(string accessToken);
-    }
+    public Task<YoliIdentityResult> SigninUsingFacebookTask(string accessToken);
 }

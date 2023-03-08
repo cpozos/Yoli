@@ -1,5 +1,4 @@
 ﻿using Yoli.Domain.Aggregates;
-using Yoli.Domain.ValueObjects;
 
 namespace Yoli.Domain.Entities;
 

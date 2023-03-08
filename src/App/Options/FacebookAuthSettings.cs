@@ -1,8 +1,7 @@
-﻿namespace Yoli.App.Options
+﻿namespace Yoli.App.Options;
+
+public class FacebookAuthSettings
 {
-    public class FacebookAuthSettings
-    {
-        public string AppId { get; set; }
-        public string AppSecret { get; set; }
-    }
+    public string AppId { get; set; }
+    public string AppSecret { get; set; }
 }

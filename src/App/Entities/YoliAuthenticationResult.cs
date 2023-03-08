@@ -1,13 +1,12 @@
-﻿namespace Yoli.App.Entities
+﻿namespace Yoli.App.Entities;
+
+public class YoliAuthenticationResult
 {
-    public class YoliAuthenticationResult
+    public bool Succeeded { get; }
+    public string Token { get; }
+    public YoliAuthenticationResult(string token = null)
     {
-        public bool Succeeded { get; }
-        public string Token { get; }
-        public YoliAuthenticationResult(string token = null)
-        {
-            Token = token ?? string.Empty;
-            Succeeded = !string.IsNullOrEmpty(token);
-        }
+        Token = token ?? string.Empty;
+        Succeeded = !string.IsNullOrEmpty(token);
     }
 }

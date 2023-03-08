@@ -1,7 +1,6 @@
-﻿namespace Domain.ValueObjects
+﻿namespace Domain.ValueObjects;
+
+public class Permission
 {
-    public class Permission
-    {
-        public string Name { get; set; }
-    }
+    public string Name { get; set; }
 }

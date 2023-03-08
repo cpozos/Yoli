@@ -143,7 +143,10 @@ builder.Services.AddSwaggerGen(c =>
     });
     c.OperationFilter<AddAuthHeaderOperationFilter>();
 });
-builder.Services.AddControllers();
+builder.Services
+    .AddControllers()
+    .AddControllersAsServices();
+
 builder.Services.AddMemoryCache();
 
 

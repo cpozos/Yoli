@@ -1,10 +1,9 @@
 ﻿using Yoli.App.Entities;
 using Yoli.Domain.Entities;
 
-namespace Yoli.App.Services
+namespace Yoli.App.Services;
+
+public interface IYoliAuthService
 {
-    public interface IYoliAuthService
-    {
-        Task<YoliAuthenticationResult> GenerateAuthenticationResultForUserAsync(IUser user);
-    }
+    Task<YoliAuthenticationResult> GenerateAuthenticationResultForUserAsync(IUser user);
 }
